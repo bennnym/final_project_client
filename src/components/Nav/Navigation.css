@@ -1,0 +1,16 @@
+.navbar-dark.bg-dark {
+  background-color: rgb(63, 46, 70) !important;
+}
+
+.btn-outline-success {
+  border-color: rgb(239, 86, 71) !important;
+  color: rgb(239, 86, 71);
+}
+
+#logo {
+  height: 3.5em;
+}
+
+/* .nav-link.active {
+  color: rgba(255, 255, 255, .5) !important;
+} */
