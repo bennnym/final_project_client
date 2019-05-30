@@ -9,3 +9,20 @@
   justify-content: space-evenly;
 }
 
+#email {
+  width: 47%;
+}
+
+#company {
+  width: 47%;
+}
+
+.form-group {
+  padding-right: 3%;
+  width: 47%;
+}
+
+.form-row {
+  width: 100%;
+  justify-content: flex-start;
+}

@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import './LoginModal.css'
 
-import StudentSignUp from './StudentSignUp'
+import StudentSignUpForm from './StudentSignUpForm'
+import EmployerSignUpForm from './EmployerSignUpForm'
 
 const SignupForm = ( props ) => {
   const [ isEmployer, setIsEmployer ] = useState( undefined )
@@ -20,7 +21,7 @@ const SignupForm = ( props ) => {
   console.log(isEmployer);
 
   
-     if (isEmployer === undefined) {
+     if (isEmployer !== true && isEmployer !== false) {
 
     return (
     <div className="choice">
@@ -36,13 +37,13 @@ const SignupForm = ( props ) => {
     )
   } else if ( isEmployer ) {
     return (
-      <h1>WHATSS UPP!</h1>
+      <EmployerSignUpForm />
     )
   }
 
   else if ( isEmployer === false ) {
     return (
-          <StudentSignUp />
+      <StudentSignUpForm />
     )
   }
     

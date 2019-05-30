@@ -2,26 +2,29 @@ import React from 'react'
 import { Form, Button, InputGroup } from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup'
+import './LoginModal.css'
 
 
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  username: yup.string().required(),
-  city: yup.string().required(),
-  state: yup.string().required(),
-  zip: yup.string().required(),
-  terms: yup.bool().required(),
+  email: yup.string().required(),
+  company: yup.string().required(),
+  password: yup.string().required('Password is required'),
+  passwordConfirmation: yup.string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+
+  // terms: yup.bool().required(),
 });
 
-const StudentSignUp = ( props ) => {
-  return(
+const EmployerSignUpForm = (props) => {
+  return (
     <Formik
       validationSchema={schema}
       onSubmit={console.log}
       initialValues={{
-        firstName: 'Mark',
-        lastName: 'Otto',
+        // firstName: 'Mark',
+        // lastName: 'Otto',
       }}
     >
       {({
@@ -35,11 +38,12 @@ const StudentSignUp = ( props ) => {
       }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <Form.Row>
-              <Form.Group  md="4" controlId="validationFormik01">
+              <Form.Group md="4" controlId="validationFormik01">
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                   type="text"
                   name="firstName"
+                  placeholder="John"
                   value={values.firstName}
                   onChange={handleChange}
                   isValid={touched.firstName && !errors.firstName}
@@ -51,77 +55,84 @@ const StudentSignUp = ( props ) => {
                 <Form.Control
                   type="text"
                   name="lastName"
+                  placeholder="Smith"
                   value={values.lastName}
                   onChange={handleChange}
                   isValid={touched.firstName && !errors.lastName}
                 />
-
+             
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group  md="4" controlId="validationFormikUsername">
-                <Form.Label>Username</Form.Label>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group id="email" md="4" controlId="validationFormikEmail">
+                <Form.Label>Email</Form.Label>
                 <InputGroup>
                   <InputGroup.Prepend>
                     <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                   </InputGroup.Prepend>
                   <Form.Control
                     type="text"
-                    placeholder="Username"
+                    placeholder="example@gmail.com"
                     aria-describedby="inputGroupPrepend"
-                    name="username"
-                    value={values.username}
+                    name="email"
+                    value={values.email}
                     onChange={handleChange}
-                    isInvalid={!!errors.username}
+                    isInvalid={!!errors.email}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.username}
+                    {errors.email}
                   </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-            </Form.Row>
+       
+            
+              <Form.Group id="company" md="6" controlId="validationFormik03">
+                <Form.Label>Company</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Google"
+                  name="company"
+                  value={values.company}
+                  onChange={handleChange}
+                  isInvalid={!!errors.company}
+                />
+
+                <Form.Control.Feedback type="invalid">
+                  {errors.company}
+                </Form.Control.Feedback>
+              </Form.Group>
+              </Form.Row>
+
             <Form.Row>
-              <Form.Group  md="6" controlId="validationFormik03">
-                <Form.Label>City</Form.Label>
+              <Form.Group id="password" md="3" controlId="validationFormik04">
+                <Form.Label>Password</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="City"
-                  name="city"
-                  value={values.city}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={values.password}
                   onChange={handleChange}
-                  isInvalid={!!errors.city}
+                  isInvalid={!!errors.password}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group id="password-confirm" md="3" controlId="validationFormik05">
+                <Form.Label>Password Confirmation</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm"
+                  name="passwordConfirmation"
+                  value={values.passwordConfirmation}
+                  onChange={handleChange}
+                  isInvalid={!!errors.passwordConfirmation}
                 />
 
                 <Form.Control.Feedback type="invalid">
-                  {errors.city}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group  md="3" controlId="validationFormik04">
-                <Form.Label>State</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="State"
-                  name="state"
-                  value={values.state}
-                  onChange={handleChange}
-                  isInvalid={!!errors.state}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.state}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group  md="3" controlId="validationFormik05">
-                <Form.Label>Zip</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Zip"
-                  name="zip"
-                  value={values.zip}
-                  onChange={handleChange}
-                  isInvalid={!!errors.zip}
-                />
-
-                <Form.Control.Feedback type="invalid">
-                  {errors.zip}
+                  {errors.passwordConfirmation}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
@@ -140,8 +151,8 @@ const StudentSignUp = ( props ) => {
           </Form>
         )}
     </Formik>
-    
+
   );
 }
 
-export default StudentSignUp;
+export default EmployerSignUpForm;
