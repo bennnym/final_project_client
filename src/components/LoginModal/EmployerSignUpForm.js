@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button, InputGroup } from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup'
+import axios from 'axios'
 import './LoginModal.css'
+
+import links from '../../links'
 
 
 const schema = yup.object({
@@ -18,10 +21,42 @@ const schema = yup.object({
 });
 
 const EmployerSignUpForm = (props) => {
+  const [ firstName, setFirstName ] = useState('');
+  const [ lastName, setLastName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ company, setCompany ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ passwordConfirmation, setPasswordConfirmation ] = useState('');
+
+  const [ error, setError ] = useState('GO')
+
+  const _handleSubmit = (event) => {
+    event.preventDefault();
+    
+    const request = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      company,
+      password,
+      password_confirmation: passwordConfirmation
+    }
+
+    axios.post( links.root + "employer/create", request).then(res => {
+      if ( res.status === 204 ){
+        setError( false )
+      }
+    }).catch( err => {
+      setError( true )
+    })
+
+  }
+
+  if ( error ){
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      // onSubmit={console.log}
       initialValues={{
         // firstName: 'Mark',
         // lastName: 'Otto',
@@ -36,7 +71,7 @@ const EmployerSignUpForm = (props) => {
         isValid,
         errors,
       }) => (
-          <Form noValidate onSubmit={handleSubmit}>
+          <Form onChange={handleChange} noValidate onSubmit={_handleSubmit}>
             <Form.Row>
               <Form.Group md="4" controlId="validationFormik01">
                 <Form.Label>First name</Form.Label>
@@ -45,7 +80,7 @@ const EmployerSignUpForm = (props) => {
                   name="firstName"
                   placeholder="John"
                   value={values.firstName}
-                  onChange={handleChange}
+                  onChange={ (e) => setFirstName( e.target.value )}
                   isValid={touched.firstName && !errors.firstName}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -57,7 +92,7 @@ const EmployerSignUpForm = (props) => {
                   name="lastName"
                   placeholder="Smith"
                   value={values.lastName}
-                  onChange={handleChange}
+                  onChange={(e) => setLastName(e.target.value)}
                   isValid={touched.firstName && !errors.lastName}
                 />
              
@@ -77,7 +112,8 @@ const EmployerSignUpForm = (props) => {
                     aria-describedby="inputGroupPrepend"
                     name="email"
                     value={values.email}
-                    onChange={handleChange}
+                    onChange={(e) => setEmail(e.target.value)}
+
                     isInvalid={!!errors.email}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -94,7 +130,8 @@ const EmployerSignUpForm = (props) => {
                   placeholder="Google"
                   name="company"
                   value={values.company}
-                  onChange={handleChange}
+                  onChange={(e) => setCompany(e.target.value)}
+
                   isInvalid={!!errors.company}
                 />
 
@@ -112,7 +149,7 @@ const EmployerSignUpForm = (props) => {
                   placeholder="Password"
                   name="password"
                   value={values.password}
-                  onChange={handleChange}
+                  onChange={(e) => setPassword(e.target.value)}
                   isInvalid={!!errors.password}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -127,7 +164,7 @@ const EmployerSignUpForm = (props) => {
                   placeholder="Confirm"
                   name="passwordConfirmation"
                   value={values.passwordConfirmation}
-                  onChange={handleChange}
+                  onChange={(e) => setPasswordConfirmation(e.target.value)}
                   isInvalid={!!errors.passwordConfirmation}
                 />
 
@@ -136,6 +173,7 @@ const EmployerSignUpForm = (props) => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+            <Form.Row>
             <Form.Group>
               <Form.Check
                 required
@@ -147,13 +185,21 @@ const EmployerSignUpForm = (props) => {
                 id="validationFormik0"
               />
             </Form.Group>
-         
+              {error === true ? <div id="error" >That Email is Already In Use, Please Try Again.</div> : ''}
+            </Form.Row>
             <Button type="submit">Submit form</Button>
           </Form>
         )}
     </Formik>
 
   );
+      } else if ( error === false ){
+        return (
+          <div>
+            <h1>ADD COMPANY CONFIRMATION HERE</h1>
+          </div>
+        )
+      }
 }
 
 export default EmployerSignUpForm;

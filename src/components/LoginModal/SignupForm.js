@@ -18,8 +18,6 @@ const SignupForm = ( props ) => {
     setIsEmployer( false )
   }
 
-  console.log(isEmployer);
-
   
      if (isEmployer !== true && isEmployer !== false) {
 

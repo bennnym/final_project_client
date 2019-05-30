@@ -42,7 +42,7 @@ const StudentSignUpForm = ( props ) => {
   // const [ profilePhoto, setProfilePhoto ] = useState(''); // for later
   // const [ cv, setCV ] = useState(''); // for later
 
-  const [ error, setError ] = useState(undefined) // for signup errors
+  const [ error, setError ] = useState("GO") // for signup errors
 
   const _getInputs = (event) => {
     event.preventDefault()
@@ -62,16 +62,15 @@ const StudentSignUpForm = ( props ) => {
   
     }
 
-    axios.post( links.student_signup + "students/create", request ).then( res => {
+    axios.post( links.root + "students/create", request ).then( res => {
       if ( res.status === 204 ){
-        setError(true)
+        setError(false)
       }
-      console.log(res);
+    }).catch( err => {
+      setError(true)
     })
-
-
   }
-
+  if ( error ) {
   return(
     <Formik
       validationSchema={schema}
@@ -126,7 +125,7 @@ const StudentSignUpForm = ( props ) => {
               </Form.Group>
             </Form.Row>
             <Form.Row>
-              <Form.Group id="email" md="4" controlId="validationFormik02">
+              <Form.Group id="email" md="4" >
                 <Form.Label>Email</Form.Label>
                 <InputGroup>
                   <InputGroup.Prepend>
@@ -207,7 +206,7 @@ const StudentSignUpForm = ( props ) => {
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group id="duration" md="6" controlId="validationFormik04">
+              <Form.Group id="duration" md="6" >
                 <Form.Label>Auction Duration ( days )</Form.Label>
                 <Form.Control
                   type="text"
@@ -244,7 +243,7 @@ const StudentSignUpForm = ( props ) => {
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group id="cv" md="6" controlId="validationFormik04">
+              <Form.Group id="cv" md="6" >
                 <Form.Label>Upload a CV</Form.Label>
                 <Form.Control
                   type="file"
@@ -262,7 +261,7 @@ const StudentSignUpForm = ( props ) => {
             </Form.Row>
 
             <Form.Row>
-              <Form.Group id="password" md="3" controlId="validationFormik05">
+              <Form.Group id="password" md="3" >
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -308,7 +307,7 @@ const StudentSignUpForm = ( props ) => {
                 id="validationFormik0"
               />
             </Form.Group>
-            { error ? <div id="error" >That Email is Already In Use, Please Try Again.</div> : ''}
+            { error === true ? <div id="error" >That Email is Already In Use, Please Try Again.</div> : ''}
             </Form.Row>
             <Button type="submit">Submit form</Button>
           </Form>
@@ -317,6 +316,13 @@ const StudentSignUpForm = ( props ) => {
 
     
   );
+      } else if ( error === false ){
+        return (
+          <div>
+            <h1>SHOW NEW PROFILE HERE</h1>
+          </div>
+        )
+      }
 }
 
 export default StudentSignUpForm;
