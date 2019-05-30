@@ -147,6 +147,7 @@ const EmployerSignUpForm = (props) => {
                 id="validationFormik0"
               />
             </Form.Group>
+         
             <Button type="submit">Submit form</Button>
           </Form>
         )}

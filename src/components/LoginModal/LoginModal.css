@@ -17,6 +17,11 @@
   width: 47%;
 }
 
+#error {
+  color: red;
+  font-weight: 900;
+}
+
 .form-group {
   padding-right: 3%;
   width: 47%;

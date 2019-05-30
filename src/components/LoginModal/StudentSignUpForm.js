@@ -1,8 +1,12 @@
-import React from 'react'
-import { Form, Button, InputGroup } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 import { Formik } from 'formik';
-import * as yup from 'yup'
-import './LoginModal.css'
+import * as yup from 'yup';
+import './LoginModal.css';
+import axios from 'axios';
+import links from '../../../src/links'
+
+
 
 
 const schema = yup.object({
@@ -25,6 +29,49 @@ const schema = yup.object({
 });
 
 const StudentSignUpForm = ( props ) => {
+  const [ firstName, setFirstName ] = useState('');
+  const [ lastName, setLastName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ university, setUniversity ] = useState('');
+  const [ gpa, setGPA ] = useState('');
+  const [ reserve, setReserve ] = useState('');
+  const [ auction, setAuctionEnd ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ passwordConfirmation, setPasswordConfirmation ] = useState('');
+
+  // const [ profilePhoto, setProfilePhoto ] = useState(''); // for later
+  // const [ cv, setCV ] = useState(''); // for later
+
+  const [ error, setError ] = useState(undefined) // for signup errors
+
+  const _getInputs = (event) => {
+    event.preventDefault()
+    console.log(event);
+
+    const request = {
+      
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        university,
+        gpa,
+        reserve_price: reserve,
+        // auction_duration: auction,
+        password,
+        password_confirmation: passwordConfirmation
+  
+    }
+
+    axios.post( links.student_signup + "students/create", request ).then( res => {
+      if ( res.status === 204 ){
+        setError(true)
+      }
+      console.log(res);
+    })
+
+
+  }
+
   return(
     <Formik
       validationSchema={schema}
@@ -43,7 +90,7 @@ const StudentSignUpForm = ( props ) => {
         isValid,
         errors,
       }) => (
-          <Form noValidate onSubmit={handleSubmit}>
+          <Form onChange={handleChange} noValidate onSubmit={_getInputs}>
             <Form.Row>
 
               <Form.Group md="4" controlId="validationFormik01">
@@ -53,9 +100,10 @@ const StudentSignUpForm = ( props ) => {
                   name="firstName"
                   placeholder="John"
                   value={values.firstName}
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   isValid={touched.firstName && !errors.firstName}
                   isInvalid={!!errors.firstName}
+                  onChange={ (event) => setFirstName( event.target.value ) }
 
                 />
                 <Form.Control.Feedback>{errors.firstName}</Form.Control.Feedback>
@@ -69,7 +117,8 @@ const StudentSignUpForm = ( props ) => {
                   name="lastName"
                   placeholder="Smith"
                   value={values.lastName}
-                  onChange={handleChange}
+                  // onChange={handleChange}
+                  onChange={(event) => setLastName(event.target.value)}
                   isValid={touched.lastName && !errors.lastName}
                 />
 
@@ -89,7 +138,8 @@ const StudentSignUpForm = ( props ) => {
                     aria-describedby="inputGroupPrepend"
                     name="email"
                     value={values.email}
-                    onChange={handleChange}
+                    // onChange={handleChange}
+                    onChange={(event) => setEmail(event.target.value)}
                     isInvalid={!!errors.email}
                     isValid={touched.email && !errors.email}
                   />
@@ -108,6 +158,7 @@ const StudentSignUpForm = ( props ) => {
                   name="university"
                   value={values.university}
                   onChange={handleChange}
+                  onChange={(event) => setUniversity(event.target.value)}
                   isInvalid={!!errors.university}
                   isValid={touched.university && !errors.university}
                 />
@@ -125,6 +176,7 @@ const StudentSignUpForm = ( props ) => {
                   name="gpa"
                   value={values.gpa}
                   onChange={handleChange}
+                  onChange={(event) => setGPA(event.target.value)}
                   isInvalid={!!errors.gpa}
                   isValid={touched.gpa && !errors.gpa}
                 />
@@ -145,6 +197,7 @@ const StudentSignUpForm = ( props ) => {
                   name="reserve"
                   value={values.reserve}
                   onChange={handleChange}
+                  onChange={(event) => setReserve(event.target.value)}
                   isInvalid={!!errors.reserve}
                   isValid={touched.reserve && !errors.reserve}
                 />
@@ -162,6 +215,7 @@ const StudentSignUpForm = ( props ) => {
                   name="duration"
                   value={values.duration}
                   onChange={handleChange}
+                  onChange={(event) => setAuctionEnd(event.target.value)}
                   isInvalid={!!errors.duration}
                   isValid={touched.duration && !errors.duration}
                 />
@@ -180,6 +234,7 @@ const StudentSignUpForm = ( props ) => {
                   name="profile-photo"
                   value={values.profilePhoto}
                   onChange={handleChange}
+                  // onChange={(event) => setFirstName(event.target.value)}
                   isInvalid={!!errors.profilePhoto}
                   isValid={touched.profilePhoto && !errors.profilePhoto}
                 />
@@ -215,6 +270,7 @@ const StudentSignUpForm = ( props ) => {
                   name="password"
                   value={values.password}
                   onChange={handleChange}
+                  onChange={(event) => setPassword(event.target.value)}
                   isInvalid={!!errors.password}
                   
                 />
@@ -231,6 +287,7 @@ const StudentSignUpForm = ( props ) => {
                   name="passwordConfirmation"
                   value={values.passwordConfirmation}
                   onChange={handleChange}
+                  onChange={(event) => setPasswordConfirmation(event.target.value)}
                   isInvalid={!!errors.passwordConfirmation}
                 />
 
@@ -239,6 +296,7 @@ const StudentSignUpForm = ( props ) => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
+            <Form.Row>
             <Form.Group>
               <Form.Check
                 required
@@ -250,6 +308,8 @@ const StudentSignUpForm = ( props ) => {
                 id="validationFormik0"
               />
             </Form.Group>
+            { error ? <div id="error" >That Email is Already In Use, Please Try Again.</div> : ''}
+            </Form.Row>
             <Button type="submit">Submit form</Button>
           </Form>
         )}
