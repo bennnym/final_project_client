@@ -1,6 +1,5 @@
 import React from 'react';  
-import { Modal, Button } from 'react-bootstrap';
-import LoginForm from './LoginForm'
+import { Modal } from 'react-bootstrap';
 
 const LoginModal = ( props ) => {
   return(

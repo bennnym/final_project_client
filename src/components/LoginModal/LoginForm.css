@@ -1,0 +1,10 @@
+#error-row {
+  justify-content: space-between !important;
+
+}
+
+#login-error {
+  color: red;
+  font-weight: 900;
+  margin-right: 20px;
+}

@@ -8,25 +8,29 @@ import Footer from '../components/Footer/Footer'
 import '../App.css'
 
 
-const Home = () => {
-  return(
+const Home = (props) => {
+  const { isEmployer, setIsEmployer, isStudent, setIsStudent } = props
+  return (
     <React.Fragment>
-      <Navigation />
+      <Navigation isEmployer={isEmployer}
+        setIsEmployer={setIsEmployer}
+        isStudent={isStudent}
+        setIsStudent={setIsStudent} />
       <div className="hero fluid ">
         <div className="container in-hero">
-        <h2 className="display-4">GradBay</h2>
-        <h6>Graduate hiring, done differently.</h6>
+          <h2 className="display-4">GradBay</h2>
+          <h6>Graduate hiring, done differently.</h6>
         </div>
       </div>
       <Layout>
-      <GradCard />
-      <Summary />
+        <GradCard />
+        <Summary />
       </Layout>
       <UniversityIcons />
       <Footer />
-  
+
     </React.Fragment>
-    
+
   );
 }
 

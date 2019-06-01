@@ -2,23 +2,28 @@ import React from 'react'
 import Layout from '../components/Layout/Layout'
 import Footer from '../components/Footer/Footer'
 import Navigation from '../components/Nav/Navigation';
+import ImageCarousel from '../components/ImageCarousel/ImageCarousel'
+import ShowCards from '../components/ShowCards/ShowCards'
 
-const Profile = (props) => {
+const Auctions = (props) => {
   const { isEmployer, setIsEmployer, isStudent, setIsStudent } = props
 
-  return (
+  return(
     <React.Fragment>
       <Navigation isEmployer={isEmployer}
         setIsEmployer={setIsEmployer}
         isStudent={isStudent}
         setIsStudent={setIsStudent} />
-    <Layout >
-      <h1>Profile Coming soon</h1>
-      {/* <p> { props.location.state.id}</p> */}
+      <ImageCarousel />
+      <Layout >
+
+      <ShowCards/>
+       
+
       </Layout>
       <Footer />
     </React.Fragment>
-  )
+  );
 }
 
-export default Profile;
+export default Auctions;

@@ -1,0 +1,8 @@
+div #horizontal-card {
+  padding: 13px;
+  height: 250px;
+}
+
+#horizontal-img {
+  max-height: 220px;
+}

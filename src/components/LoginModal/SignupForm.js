@@ -6,20 +6,23 @@ import StudentSignUpForm from './StudentSignUpForm'
 import EmployerSignUpForm from './EmployerSignUpForm'
 
 const SignupForm = ( props ) => {
-  const [ isEmployer, setIsEmployer ] = useState( undefined )
+  const [ Employer, setEmployer ] = useState( undefined );
+  const { isEmployer, setIsEmployer, isStudent, setIsStudent } = props
+
+  
 
   const _handleEmployerClick = (event) => {
     event.preventDefault()
-    setIsEmployer( true )
+    setEmployer( true )
   }
 
     const _handleStudentClick = (event) => {
     event.preventDefault()
-    setIsEmployer( false )
+    setEmployer( false )
   }
 
   
-     if (isEmployer !== true && isEmployer !== false) {
+     if (Employer !== true && Employer !== false) {
 
     return (
     <div className="choice">
@@ -33,15 +36,25 @@ const SignupForm = ( props ) => {
 
     </div>
     )
-  } else if ( isEmployer ) {
+  } else if ( Employer ) {
     return (
-      <EmployerSignUpForm />
+      <EmployerSignUpForm
+        isEmployer={isEmployer}
+        setIsEmployer={setIsEmployer}
+        isStudent={isStudent}
+        setIsStudent={setIsStudent}
+       />
     )
   }
 
-  else if ( isEmployer === false ) {
+  else if ( Employer === false ) {
     return (
-      <StudentSignUpForm />
+      <StudentSignUpForm
+        isEmployer={isEmployer}
+        setIsEmployer={setIsEmployer}
+        isStudent={isStudent}
+        setIsStudent={setIsStudent}
+       />
     )
   }
     

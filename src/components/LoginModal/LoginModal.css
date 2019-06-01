@@ -34,6 +34,7 @@
 
 .profile-confirm {
   max-height: 200px;
+  max-width: 300px;
 }
 
 #spinner {
@@ -49,10 +50,16 @@
 .show-data ul {
   list-style: none;
   line-height: 367%;
+  text-align: center;
 }
 
 .time-left {
   color: orangered;
+  font-weight: 900;
+}
+
+span {
+  margin-left: 4px;
 }
 
 .photo-container {
@@ -62,5 +69,9 @@
 @media only screen and (max-width: 700px) {
   .photo-container {
     flex-direction: column;
+  }
+
+  .show-photo {
+    text-align: center;
   }
 }
