@@ -15,7 +15,7 @@ const ShowCards = () => {
       .then( res => {
         setGradData(res.data)
       })
-  })
+  }, [])
 
   return(
   <CardGroup >

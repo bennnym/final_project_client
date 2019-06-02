@@ -406,7 +406,7 @@ const StudentSignUpForm = props => {
 						<li>Time Till Employment: </li>
 						<li>
 							<span className='time-left'>
-								{day} days, {hour} hours, {minute} minutes, {second} seconds
+								{day}d {hour}h {minute}m {second}s
 							</span>
 						</li>
 						<li>

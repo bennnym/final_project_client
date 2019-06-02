@@ -14,9 +14,10 @@ import {
 	faSignInAlt,
 	faUserPlus,
 	faSpinner,
+	faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faUserGraduate, faBuilding, faSignInAlt, faUserPlus, faSpinner);
+library.add(faUserGraduate, faBuilding, faSignInAlt, faUserPlus, faSpinner, faSearch);
 
 function App() {
 	const [isEmployer, setIsEmployer] = useState("");

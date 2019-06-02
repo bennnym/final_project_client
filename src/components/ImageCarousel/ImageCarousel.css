@@ -1,12 +1,16 @@
-#carousel-container img {
-  height: 370px;
-  /* padding: 0 225px; */
-  width: 256px;
+#image-one {
+  position: relative;
+  bottom: 100px;
+}
 
-  display: inline-block;
+#image-three {
+  position: relative;
+  bottom: 110px;
 }
 
 #carousel-container {
+  height: 311px;
+
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

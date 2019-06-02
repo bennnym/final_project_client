@@ -3,6 +3,51 @@ div #horizontal-card {
   height: 250px;
 }
 
+.row img {
+  height: 200px;
+}
+
 #horizontal-img {
   max-height: 220px;
+}
+
+#timer {
+  color: red;
+  font-weight: 900;
+}
+
+#uni {
+  font-weight: 600;
+}
+
+#price {
+  font-weight: 700;
+}
+
+#name {
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 700px) {
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
+  .row img {
+    height: 170px;
+  }
+
+  div #horizontal-card {
+    padding: 13px;
+    height: 400px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  #card-holder {
+    height: 400px;
+    margin-bottom: 20px;
+  }
 }
