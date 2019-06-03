@@ -20,11 +20,11 @@ div.card-group {
 }
 
 #card-properties {
-  height: 57vh;
+  height: 30em;
 }
 
 #card-image {
-  height: 175px;
+  height: 200px;
 }
 
 #timer {
@@ -34,6 +34,10 @@ div.card-group {
 
 @media only screen and (max-width: 700px) {
   #card-properties {
-    height: 73vh;
+    height: 68vh;
+  }
+
+  #card-image {
+    height: 173px;
   }
 }

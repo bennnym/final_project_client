@@ -24,7 +24,8 @@ const Navigation = props => {
 	const _logout = () => {
 		localStorage.setItem("jwt", "");
 		localStorage.setItem("email", "");
-		localStorage.setItem("user", "");
+		localStorage.setItem("student", "");
+		localStorage.setItem("employer", "");
 	};
 
 	const { isEmployer, setIsEmployer, isStudent, setIsStudent } = props;
@@ -53,7 +54,7 @@ const Navigation = props => {
 							</NavDropdown.Item>
 							<NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item>
 							<NavDropdown.Divider />
-							<NavDropdown.Item onClick={_logout} href='/'>
+							<NavDropdown.Item onClick={_logout} href={ props.href }>
 								Logout
 							</NavDropdown.Item>
 						</NavDropdown>

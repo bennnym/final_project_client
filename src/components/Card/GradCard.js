@@ -26,7 +26,7 @@ const GradCard = props => {
 			to={{ opacity: 1 }}
 			config={{ duration: 1500 }}>
 			{props => (
-				<div style={props}>
+				<div >
 					<CardGroup>
 						{cardsData
 							? _.first(cardsData, 4).map(c => {

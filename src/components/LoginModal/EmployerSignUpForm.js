@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import "./LoginModal.css";
+import { connect } from 'react-redux'
 
 import links from "../../links";
 
@@ -58,8 +59,9 @@ const EmployerSignUpForm = props => {
 				axios
 					.post(links.root + "employer_token", { auth: { email, password } })
 					.then(res => {
+						props.dispatch({ type: 'SETEMPLOYER' })
 						localStorage.setItem("jwt", res.data.jwt);
-						localStorage.setItem("user", "employer");
+						localStorage.setItem("employer", true);
 						localStorage.setItem("email", email);
 					});
 			})
@@ -236,4 +238,11 @@ const EmployerSignUpForm = props => {
 	}
 };
 
-export default EmployerSignUpForm;
+const mapStateToProps = (state) => {
+	return {
+		employer: state.employer
+	};
+}
+
+export default connect(mapStateToProps)(EmployerSignUpForm);
+

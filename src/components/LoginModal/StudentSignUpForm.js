@@ -8,6 +8,7 @@ import moment from "moment";
 import links from "../../../src/links";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
 
 const schema = yup.object({
 	firstName: yup.string().required(),
@@ -38,7 +39,6 @@ const schema = yup.object({
 		.string()
 		.oneOf([yup.ref("password"), null], "Passwords must match"),
 
-	// terms: yup.bool().required(),
 });
 
 const StudentSignUpForm = props => {
@@ -51,7 +51,6 @@ const StudentSignUpForm = props => {
 	const [gpa, setGPA] = useState("");
 	const [reserve, setReserve] = useState("");
 	const [auction, setAuctionEnd] = useState("");
-	// const [timeEnd, setTimeEnd] = useState('');
 	const [password, setPassword] = useState("");
 	const [passwordConfirmation, setPasswordConfirmation] = useState("");
 	const [id, setId] = useState("");
@@ -115,26 +114,23 @@ const StudentSignUpForm = props => {
 		axios
 			.post(links.root + "students/create", fd)
 			.then(res => {
-				// console.log(res.data.auction_duration);
+				// console.log(res.data.auction_duration); #2
 				if (res.status === 200) {
 					const { profile_photo, id, auction_duration } = res.data;
-					// console.log('this is what I am trying to set it to,', auction_duration);
 					setProfilePhoto(profile_photo);
 					setId(id);
 					setIsStudent(true);
-					// setTimeEnd(auction_duration) //// WHY IS THIS NOT WORKING
 					setError(false);
 					timeDisplay(auction_duration);
 					setLoading(false);
-					// console.log('this is where we set auction', timeEnd);
 				}
 
 				axios
 					.post(links.root + "student_token", { auth: { email, password } })
 					.then(res => {
-						console.log("THIS IS THE STUDENT RES", res);
+						props.dispatch({ type: 'SETSTUDENT' })
 						localStorage.setItem("jwt", res.data.jwt);
-						localStorage.setItem("user", "employer");
+						localStorage.setItem("student", true);
 						localStorage.setItem("email", email);
 					});
 			})
@@ -430,4 +426,10 @@ const StudentSignUpForm = props => {
 	}
 };
 
-export default StudentSignUpForm;
+const mapStateToProps = (state) => {
+	return {
+		student: state.student,
+	};
+}
+
+export default connect(mapStateToProps)(StudentSignUpForm);

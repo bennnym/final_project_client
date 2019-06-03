@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Formik } from 'formik';
+import { connect } from 'react-redux'
 import * as yup from 'yup';
 import links from '../../../src/links';
 import axios from 'axios';
@@ -32,25 +33,26 @@ const LoginForm = ( props ) => {
       if ( res.status === 201 ){
         setIsEmployer( true )
         setLoggedIn( true )
-        setError( false )
+        props.dispatch({ type: 'SETEMPLOYER' })
+        console.log('employer', props.employer);
         localStorage.setItem('jwt', res.data.jwt)
-        localStorage.setItem('user', 'employer')
+        localStorage.setItem('employer', true)
         localStorage.setItem('email', email)
-
+        setError(false)
       } 
     })
     .catch( err => {
-  
       axios
       .post(links.root + 'student_token', request)
       .then( res => {
         if (res.status === 201) {
           setIsStudent(true)
           setLoggedIn(true)
-          setError(false)
+          // props.dispatch({ type: 'SETSTUDENT' })
           localStorage.setItem('jwt', res.data.jwt)
-          localStorage.setItem('user', 'student')
+          localStorage.setItem('student', true )
           localStorage.setItem('email', email)
+          setError(false)
         } 
       }).catch( err => {
         setError( true )
@@ -131,4 +133,13 @@ if (!loggedIn){
   }
 }
 
-export default LoginForm;
+// export default LoginForm;
+
+const mapStateToProps = (state) => {
+  return {
+    student: state.student,
+    employer: state.employer
+  };
+}
+
+export default connect(mapStateToProps)(LoginForm);

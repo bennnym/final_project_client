@@ -14,11 +14,13 @@ const Auctions = (props) => {
       <Navigation isEmployer={isEmployer}
         setIsEmployer={setIsEmployer}
         isStudent={isStudent}
-        setIsStudent={setIsStudent} />
+        setIsStudent={setIsStudent}
+        href="/auctions" />
       <ImageCarousel />
       <Layout >
       <SearchInput/>
-      <ShowCards/>
+      <ShowCards
+      />
        
 
       </Layout>

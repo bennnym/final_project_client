@@ -6,7 +6,7 @@ import axios from 'axios';
 import links from '../../links'
 
 
-const ShowCards = () => {
+const ShowCards = (props) => {
   const [ gradData, setGradData ] = useState([])
 
   useEffect(() => {
@@ -21,22 +21,22 @@ const ShowCards = () => {
   <CardGroup >
        
        { gradData ? gradData.map( grads => {
-         const { id, first_name, last_name, university, profile_photo, reserve_price, auction_duration } = grads
+         const { id, first_name, last_name, university, profile_photo, reserve_price, auction_duration, bids } = grads
          return (
            <SingleCard
+             key={id}
              image={profile_photo}
              timeLeft={ auction_duration}
              price={reserve_price}
              firstName={first_name}
              lastName={last_name}
              university={university}
+             id={id}
+             bids={bids}
            />
          )
 
        }) : '' }
-    <SingleCard 
-      image={headshot}
-    />
 
   </CardGroup>
  );

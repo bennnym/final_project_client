@@ -15,7 +15,8 @@ const Home = (props) => {
       <Navigation isEmployer={isEmployer}
         setIsEmployer={setIsEmployer}
         isStudent={isStudent}
-        setIsStudent={setIsStudent} />
+        setIsStudent={setIsStudent}
+        href="/" />
       <div className="hero fluid ">
         <div className="container in-hero">
           <h2 className="display-4">GradBay</h2>
