@@ -42,8 +42,6 @@ const schema = yup.object({
 });
 
 const StudentSignUpForm = props => {
-	const { setIsStudent } = props;
-
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -119,7 +117,6 @@ const StudentSignUpForm = props => {
 					const { profile_photo, id, auction_duration } = res.data;
 					setProfilePhoto(profile_photo);
 					setId(id);
-					setIsStudent(true);
 					setError(false);
 					timeDisplay(auction_duration);
 					setLoading(false);

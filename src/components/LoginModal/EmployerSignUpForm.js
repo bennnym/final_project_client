@@ -25,7 +25,6 @@ const schema = yup.object({
 });
 
 const EmployerSignUpForm = props => {
-	const { setIsEmployer } = props;
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -53,7 +52,6 @@ const EmployerSignUpForm = props => {
 			.then(res => {
 				if (res.status === 204) {
 					setError(false);
-					setIsEmployer(true);
 				}
 
 				axios

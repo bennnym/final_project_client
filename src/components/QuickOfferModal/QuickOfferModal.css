@@ -1,0 +1,36 @@
+.student-warning {
+  text-align: center;
+  color: red;
+  font-weight: 900;
+}
+
+.quick-offer-input {
+  width: 60%;
+}
+
+.terms,
+.offer-final {
+  margin-left: 0.5em;
+}
+
+.bid-success {
+  text-align: center;
+}
+
+.not-loggedin {
+  text-align: center;
+  font-weight: 900;
+  color: orangered;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .quick-offer-input,
+  .form-check-label {
+    width: 80%;
+  }
+
+  .terms {
+    margin-left: 0.5em;
+  }
+}

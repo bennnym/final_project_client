@@ -16,7 +16,6 @@ const schema = yup.object({
 
 
 const LoginForm = ( props ) => {
-  const { setIsEmployer, setIsStudent } = props
   const [email, setEmail] = useState('') // save user email
   const [password, setPassword] = useState('') // save pw
   const [error, setError] = useState('');
@@ -31,10 +30,8 @@ const LoginForm = ( props ) => {
     .post(links.root + 'employer_token', request )
     .then( res => {
       if ( res.status === 201 ){
-        setIsEmployer( true )
         setLoggedIn( true )
         props.dispatch({ type: 'SETEMPLOYER' })
-        console.log('employer', props.employer);
         localStorage.setItem('jwt', res.data.jwt)
         localStorage.setItem('employer', true)
         localStorage.setItem('email', email)
@@ -46,9 +43,8 @@ const LoginForm = ( props ) => {
       .post(links.root + 'student_token', request)
       .then( res => {
         if (res.status === 201) {
-          setIsStudent(true)
           setLoggedIn(true)
-          // props.dispatch({ type: 'SETSTUDENT' })
+          props.dispatch({ type: 'SETSTUDENT' })
           localStorage.setItem('jwt', res.data.jwt)
           localStorage.setItem('student', true )
           localStorage.setItem('email', email)
@@ -83,7 +79,7 @@ if (!loggedIn){
         errors,
       }) => (
           <Form onChange={handleChange} noValidate action="/users">
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group id="login" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 name="email"
@@ -96,7 +92,7 @@ if (!loggedIn){
               </Form.Text>
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group id="login" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 name="password"

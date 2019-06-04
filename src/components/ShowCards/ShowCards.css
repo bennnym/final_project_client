@@ -43,10 +43,7 @@ div #horizontal-card {
     flex-direction: column;
 }
 
-.card-buttons a {
-  margin-top: 1em;
-  width: 80%;
-}
+
 
 .card-buttons button {
   margin-top: 1em;
@@ -72,18 +69,23 @@ div #horizontal-card {
 
   div #horizontal-card {
     padding: 13px;
-    height: 500px;
+    height: 520px;
     margin-bottom: 20px;
     overflow: hidden;
   }
 
   #card-holder {
-    height: 500px;
+    height: 520px;
     margin-bottom: 20px;
   }
 
   .card-buttons a {
     margin-top: 1em;
+    width: 100%;
+  }
+
+  .card-buttons button {
+    margin-top: 0.5em;
     width: 100%;
   }
 }

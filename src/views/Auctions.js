@@ -7,14 +7,10 @@ import ShowCards from '../components/ShowCards/ShowCards';
 import SearchInput from '../components/SearchInput/SearchInput';
 
 const Auctions = (props) => {
-  const { isEmployer, setIsEmployer, isStudent, setIsStudent } = props
 
   return(
     <React.Fragment>
-      <Navigation isEmployer={isEmployer}
-        setIsEmployer={setIsEmployer}
-        isStudent={isStudent}
-        setIsStudent={setIsStudent}
+      <Navigation 
         href="/auctions" />
       <ImageCarousel />
       <Layout >
