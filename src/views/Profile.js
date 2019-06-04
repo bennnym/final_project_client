@@ -4,17 +4,12 @@ import Footer from '../components/Footer/Footer'
 import Navigation from '../components/Nav/Navigation';
 
 const Profile = (props) => {
-  const { isEmployer, setIsEmployer, isStudent, setIsStudent } = props
 
   return (
     <React.Fragment>
-      <Navigation isEmployer={isEmployer}
-        setIsEmployer={setIsEmployer}
-        isStudent={isStudent}
-        setIsStudent={setIsStudent} />
+      <Navigation/>
     <Layout >
-      <h1>Profile Coming soon</h1>
-      {/* <p> { props.location.state.id}</p> */}
+        <h1>Profile Coming soon for profile {props.location.state.id}</h1>
       </Layout>
       <Footer />
     </React.Fragment>

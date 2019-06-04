@@ -15,9 +15,9 @@ const SingleCard = props => {
 		lastName,
 		university,
 		id,
-    bids,
-    renderCards,
-    reservePrice
+		bids,
+		renderCards,
+		reservePrice,
 	} = props;
 	const [day, setDays] = useState("");
 	const [hour, setHours] = useState("");
@@ -52,7 +52,7 @@ const SingleCard = props => {
 			setMinutes(minutes);
 			setSeconds(seconds);
 		}, 1000);
-  }, []);
+	}, []);
 
 	return (
 		<React.Fragment>
@@ -98,15 +98,21 @@ const SingleCard = props => {
 									<QuickOfferModal
 										show={modalShow}
 										studentID={id}
-                    onHide={() => setModalShow(false)}
+										onHide={() => setModalShow(false)}
 										form={<LoginForm />}
-                    renderCards={renderCards}
-                    bids={bids}
-                    reservePrice={reservePrice}
+										renderCards={renderCards}
+										bids={bids}
+										reservePrice={reservePrice}
 									/>
 								</p>
 								<p>
-									<Link to='/auctions'>
+									<Link
+										to={{
+											pathname: `/profile/${id}`,
+											state: {
+												id: id,
+											},
+										}}>
 										<Button>View Profile</Button>
 									</Link>
 								</p>
@@ -120,4 +126,4 @@ const SingleCard = props => {
 	);
 };
 
-export default SingleCard
+export default SingleCard;

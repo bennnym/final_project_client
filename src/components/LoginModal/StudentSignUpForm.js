@@ -9,6 +9,7 @@ import links from "../../../src/links";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
+import SignUpProfile from './SignUpProfile'
 
 const schema = yup.object({
 	firstName: yup.string().required(),
@@ -387,38 +388,16 @@ const StudentSignUpForm = props => {
 		);
 	} else if (error === false) {
 		return (
-			<div className='photo-container'>
-				<div className='show-photo'>
-					<img className='profile-confirm' src={profilePhoto} alt='' />
-				</div>
-				<div className='show-data'>
-					<ul>
-						<li>
-							Reserve Salary: <span> ${reserve}</span>
-						</li>
-						<li>Time Till Employment: </li>
-						<li>
-							<span className='time-left'>
-								{day}d {hour}h {minute}m {second}s
-							</span>
-						</li>
-						<li>
-							Bids: <span>0</span>{" "}
-						</li>
-						<li>
-							<Link
-								to={{
-									pathname: `/profile/${id}`,
-									state: {
-										id: id,
-									},
-								}}>
-								Profile
-							</Link>
-						</li>
-					</ul>
-				</div>
-			</div>
+
+			<SignUpProfile
+				profilePhoto={profilePhoto}
+				reserve={reserve}
+				day={day}
+				hour={hour}
+				minute={minute}
+				second={second}
+				id={id}
+				/>
 		);
 	}
 };
