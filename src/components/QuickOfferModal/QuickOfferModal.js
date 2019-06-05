@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import {
 	Modal,
 	Button,
@@ -17,11 +17,6 @@ const QuickOfferModal = props => {
 	const [bidAmount, setBidAmount] = useState("");
 	const [highBid, setHighBid] = useState("");
   const { bids, reservePrice, renderCards, onHide, form, show } = props;
-  // Create a ref that we add to the element for which we want to detect outside clicks
-  // // State for our modal
-  // // const [isModalOpen, setModalOpen] = useState(false);
-  // // Call hook passing in the ref and a function to call on outside click
-  // useOnClickOutside(ref, () => setModalOpen(false));
 
   const _hideHandler = () => {
     setHighBid('');

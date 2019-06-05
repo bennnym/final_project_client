@@ -1,0 +1,30 @@
+.profile-layout {
+  margin-top: 100px;
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 350px;
+  max-height: 350px !important;
+  border-radius: 0.3em;
+  box-shadow: 0 0.1rem 0.4rem;
+}
+
+.profile-name {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+.last-price {
+  text-decoration: line-through;
+}
+
+@media only screen and (max-width: 700px) {
+ .col-4,
+ .col-8 {
+   max-width: 100% !important;
+  }
+
+  
+}

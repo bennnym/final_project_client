@@ -1,6 +1,7 @@
 div #horizontal-card {
   padding: 13px;
   height: 250px;
+  box-shadow: 0 0.1rem 0.2rem;
 }
 
 .row img {

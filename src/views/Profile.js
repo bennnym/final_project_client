@@ -1,15 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout/Layout'
 import Footer from '../components/Footer/Footer'
 import Navigation from '../components/Nav/Navigation';
+import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
+import axios from 'axios';
+import links from '../links'
+import { Redirect } from 'react-router-dom'
+import { Row, Col } from 'react-bootstrap';
+import './Profile.css'
 
 const Profile = (props) => {
+  const [ data, setData ] = useState({})
+  const [bidArr, setBidArr] = useState(false)
+  const [ id, setID ] = useState('')
 
+
+  const renderProfile = () => {
+    if (!props.location.state ){   
+      var newID = window.location.pathname.split('/')
+      newID = newID[newID.length - 1]
+     } else {
+      newID = props.location.state.id
+     }
+      setID(newID)
+
+    axios
+      .get(links.root + `student/${ newID }`)
+      .then( (res) => { 
+        console.log(res.data);
+        setData( res.data )
+        setBidArr( res.data.bids )
+      })
+      .catch( err => {
+        console.log(err);
+      })
+  }
+
+  useEffect( () => {
+    renderProfile()
+  }, [])
+
+  if ( data === null ) { return (<Redirect to="/auctions" /> )}
+  console.log('this is bidArr', bidArr);
   return (
     <React.Fragment>
       <Navigation/>
-    <Layout >
-        <h1>Profile Coming soon for profile {props.location.state.id}</h1>
+    <Layout>
+        <Row className="profile-layout">
+          <Col xs={4}>{data ? <div className="text-center"><img className="profile-image mx-auto" src={data.profile_photo} alt="profile" /></div>  : ''}</Col>
+          <Col xs={8}>
+          <ProfileDisplay 
+            data={data}
+            bidArr={bidArr}
+          />
+          </Col>
+        </Row>
+     
       </Layout>
       <Footer />
     </React.Fragment>

@@ -38,7 +38,7 @@ const HomeCard = ( props ) => {
       <Card.Body>
         <Card.Title>{first_name} {last_name}</Card.Title>
         <Card.Text> {university}</Card.Text>
-        <Card.Text> <strong>${formatNumber( reserve_price )}</strong></Card.Text>
+        <Card.Text> <strong>${formatNumber( bids.length > 0 ? bids[0].amount : reserve_price )}</strong></Card.Text>
         <Card.Text id="timer">{hour}h {minute}m left </Card.Text>
         <Card.Text>Offers: { bids.length } </Card.Text>
         <Button variant="primary">Make an Offer</Button>
