@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout/Layout'
 import Footer from '../components/Footer/Footer'
 import Navigation from '../components/Nav/Navigation';
+import ContentTable from '../components/ContentTable/ContentTable'
 import ProfileDisplay from '../components/ProfileDisplay/ProfileDisplay'
 import axios from 'axios';
 import links from '../links'
@@ -45,18 +46,21 @@ const Profile = (props) => {
   return (
     <React.Fragment>
       <Navigation/>
-    <Layout>
+    {/* <Layout> */}
         <Row className="profile-layout">
-          <Col xs={4}>{data ? <div className="text-center"><img className="profile-image mx-auto" src={data.profile_photo} alt="profile" /></div>  : ''}</Col>
-          <Col xs={8}>
+          <Col xs={6}>{data ? <div className="text-center">        <h1 className="mobile-name">{data.first_name} {data.last_name}</h1>
+<img className="profile-image mx-auto" src={data.profile_photo} alt="profile" /></div>  : ''}</Col>
+          <Col xs={6}>
           <ProfileDisplay 
             data={data}
             bidArr={bidArr}
           />
           </Col>
         </Row>
+
+      <ContentTable />
      
-      </Layout>
+      {/* </Layout> */}
       <Footer />
     </React.Fragment>
   )

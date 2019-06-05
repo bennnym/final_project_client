@@ -32,6 +32,10 @@ div.card-group {
   font-weight: 900;
 }
 
+#home-button {
+  background-color: webkit-gradient(linear, left top, left bottom, from(#0079bc), to(#00509d)) !important;
+}
+
 @media only screen and (max-width: 700px) {
   #card-properties {
     height: 68vh;

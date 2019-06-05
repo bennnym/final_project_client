@@ -5,9 +5,10 @@
 .profile-image {
   width: 100%;
   max-width: 350px;
-  max-height: 350px !important;
-  border-radius: 0.3em;
+  height: 253px !important;
+  /* border-radius: 0.3em; */
   box-shadow: 0 0.1rem 0.4rem;
+  margin-bottom: 1em;
 }
 
 .profile-name {
@@ -16,15 +17,87 @@
   font-size: 2em;
 }
 
+.price-display {
+  margin-top: 1em;
+  width: 60%;
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+.price-display.buttons {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: left;
+  margin-left: 1em;
+  width: 70%;
+}
+
+.price-display button {
+  width: 80%; 
+}
+
 .last-price {
   text-decoration: line-through;
 }
 
+.text-col {
+  padding-right: 3em;
+  margin-right: 13px;
+}
+
+.price {
+  text-align: left;
+}
+
+.price-now {
+  /* padding-left: 2.5em !important; */
+  font-weight: 800;
+  margin-left: -5px;
+}
+
+.pricing {
+  width: 74%;
+  background-color: rgb(226, 226, 226); 
+  border: 1px solid #ccc;
+  box-shadow: 0 0.1rem 0.4rem;
+}
+
+.mobile-name {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2em;
+  text-align: left;
+  max-width: 350px;
+  display: none;
+}
+
+
 @media only screen and (max-width: 700px) {
  .col-4,
- .col-8 {
+ .col-6 {
    max-width: 100% !important;
   }
 
-  
+  .profile-image {
+    margin-top: 35px;
+  }
+
+  .pricing {
+    width: 92%;
+    margin-left: 1em;
+    border-radius: 0.2em;
+  }
+
+  .price-display {
+    width: 56%;
+  }
+
+  .profile-name {
+    margin-left: 1em;
+    display: none;
+  }
+
+  .mobile-name {
+    display: contents;
+  }
 }

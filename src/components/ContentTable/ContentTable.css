@@ -1,0 +1,10 @@
+.table {
+  margin: auto;
+  width: 75.2% !important;
+}
+
+.table-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
