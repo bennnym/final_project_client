@@ -1,0 +1,29 @@
+.accordion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.accordion .card {
+  width: 75.2% !important;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.card-body {
+   height: 800px;
+}
+
+@media only screen and (max-width: 700px) {
+  .accordion .card {
+    width: 100% !important;
+  }
+
+  iframe {
+    width: 100%;
+    height: 70%;
+  }
+}

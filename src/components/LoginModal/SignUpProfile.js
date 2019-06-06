@@ -5,6 +5,16 @@ import "./LoginModal.css";
 
 const SignUpProfile = (props) => {
   const { profilePhoto, reserve, day, hour, minute, second, id} = props
+
+  const formatNumber = num => {
+    if (num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    } //formats with commas
+    else {
+      return "";
+    }
+  };
+
   return(
     <div className='photo-container'>
       <div className='show-photo'>
@@ -13,7 +23,7 @@ const SignUpProfile = (props) => {
       <div className='show-data'>
         <ul>
           <li>
-            Reserve Salary: <span> ${reserve}</span>
+            Reserve Salary: <span> ${formatNumber(reserve)}</span>
           </li>
           <li>Time Till Employment: </li>
           <li>

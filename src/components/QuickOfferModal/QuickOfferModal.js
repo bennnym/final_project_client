@@ -50,11 +50,8 @@ const QuickOfferModal = props => {
           setHighBid(high)
         }
         
-        // high ? props.dispatch({ type: 'HIGHBIDTRUE' }) : props.dispatch({ type: 'HIGHBIDFALSE' })
-
 				renderCards();
 				// renders the updated prices
-				//	onHide(); // closes the modal
 			}
 		});
 	};

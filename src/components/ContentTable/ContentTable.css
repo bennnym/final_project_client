@@ -8,3 +8,14 @@
   flex-direction: column;
   justify-content: center;
 }
+
+#hacker {
+  text-transform: capitalize;
+}
+
+@media only screen and (max-width: 700px) {
+.table {
+  width: 95.2% !important;
+}
+
+}

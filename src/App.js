@@ -17,13 +17,15 @@ import {
 	faSignInAlt,
 	faUserPlus,
 	faSpinner,
-	faSearch
+	faSearch,
+	faCheckCircle,
+	faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 
 
 
-library.add(faUserGraduate, faBuilding, faSignInAlt, faUserPlus, faSpinner, faSearch);
+library.add(faUserGraduate, faBuilding, faSignInAlt, faUserPlus, faSpinner, faSearch, faCheckCircle, faTimesCircle);
 
 function App() {
 
