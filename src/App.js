@@ -19,13 +19,14 @@ import {
 	faSpinner,
 	faSearch,
 	faCheckCircle,
-	faTimesCircle
+	faTimesCircle,
+	faHeart
 } from "@fortawesome/free-solid-svg-icons";
 
 
 
 
-library.add(faUserGraduate, faBuilding, faSignInAlt, faUserPlus, faSpinner, faSearch, faCheckCircle, faTimesCircle);
+library.add(faUserGraduate, faBuilding, faSignInAlt, faUserPlus, faSpinner, faSearch, faCheckCircle, faTimesCircle, faHeart);
 
 function App() {
 

@@ -28,7 +28,6 @@ const Profile = props => {
 		axios
 			.get(links.root + `student/${newID}`)
 			.then(res => {
-				console.log(res.data);
 				setData(res.data);
 				setBidArr(res.data.bids);
 			})
@@ -44,7 +43,6 @@ const Profile = props => {
 	if (data === null) {
 		return <Redirect to='/auctions' />;
 	}
-	console.log("this is bidArr", bidArr);
 	return (
 		<React.Fragment>
 			<Navigation />
@@ -72,7 +70,7 @@ const Profile = props => {
 				</Col>
 			</Row>
 
-      
+
 
 			<ContentTable 
         data={data}

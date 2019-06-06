@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import QuickOfferModal from '../QuickOfferModal/QuickOfferModal'
 import LoginForm from '../LoginModal/LoginForm'
 import _ from "underscore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './ProfileDisplay.css'
+import links from '../../links'
+import { connect } from 'react-redux'
+import axios from 'axios'
 
 const ProfileDisplay = props => {
   const [modalShow, setModalShow] = useState(false);
+  const [toggleHeart, setToggleHeart] = useState("true")
 
 	const {
 		id,
@@ -18,9 +23,9 @@ const ProfileDisplay = props => {
 		last_name,
 		gpa,
 		reserve_price,
-		university,
+    university,
+    watchlists
 	} = props.data;
-	const [lastPrice, setLastPrice] = useState("");
 
 	const formatNumber = num => {
 		if (num) {
@@ -29,7 +34,35 @@ const ProfileDisplay = props => {
 		else {
 			return "";
 		}
-	};
+  };
+
+
+  const renderWatching = () => {
+    let watching = _.findWhere(watchlists, {employer_email: localStorage.email})
+
+    if ( watching === undefined ) {
+      return (
+             <Button onClick={_updateWatchlist} variant='outline-danger'>Add To Watchlist <FontAwesomeIcon className="heart" style={{ color: "#fff" }} icon='heart' />
+          </Button>
+      )
+    } else {
+      return (
+        <Button onClick={_updateWatchlist} variant='outline-danger'>Add To Watchlist <FontAwesomeIcon className="heart" style={{ color: "#dc3545" }} icon='heart' />
+        </Button>
+      )
+    }
+  }
+
+  const _updateWatchlist = () => {
+    axios
+      .post( links.root + `watchlist/${ id }`, {employer_email: localStorage.email})
+      .then( res => {
+        console.log(res);
+        if ( res.status === 204 ){
+          props.renderProfile()
+        }
+      })
+  }
 
 	const getLastPrice = arr => {
 		if (bids.length > 1) {
@@ -56,11 +89,16 @@ const ProfileDisplay = props => {
     if (bids.length > 0) {
       return bids[0].company;
     }
+
+    return "No Offers Yet"
+
   };
   const getBids = arr => {
     if (bids.length > 0) {
       return bids.length;
     }
+
+    return "0"
   };
 
 	return (
@@ -115,13 +153,23 @@ const ProfileDisplay = props => {
           bids={bids}
           reservePrice={reserve_price}
         />
-
+      
+      { props.employer ?
 				<div className='price-display buttons'>
-					<Button variant='danger'>Add to watchlist</Button>
-				</div>
+            {watchlists ? renderWatching() :<Button onClick={_updateWatchlist} variant='outline-danger'>Add To Watchlist <FontAwesomeIcon className="heart" icon='heart' />
+            </Button>}
+          
+				</div> : <></> }
 			</div>
 		</div>
 	);
 };
 
-export default ProfileDisplay;
+const mapStateToProps = (state) => {
+  return {
+    student: state.student,
+    employer: state.employer
+  };
+}
+
+export default connect(mapStateToProps)(ProfileDisplay);
