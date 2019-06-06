@@ -10,6 +10,11 @@
   border-left: 1px solid rgba(0, 0, 0, .125) !important;
 }   
 
+.card-group a {
+   color: inherit;
+   text-decoration: inherit;
+}
+
 .card-display:hover {
   transform: translateY(-.1rem) scale(1.01) !important;
   box-shadow: 0 1.5rem 4rem !important;

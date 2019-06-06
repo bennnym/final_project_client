@@ -294,6 +294,7 @@ const StudentSignUpForm = props => {
 								<Form.Label>Upload a Profile Photo</Form.Label>
 								<Form.Control
 									type='file'
+									accept=".jpg, .jpeg, .png"
 									name='profile-photo'
 									value={values.profilePhoto}
 									// onChange={handleChange}
@@ -311,6 +312,7 @@ const StudentSignUpForm = props => {
 								<Form.Label>Upload a CV</Form.Label>
 								<Form.Control
 									type='file'
+									accept=".pdf"
 									name='cv'
 									value={values.cv}
 									onChange={event => setCV(event.target.files[0])}

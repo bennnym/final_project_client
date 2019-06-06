@@ -1,12 +1,11 @@
 .profile-layout {
   margin-top: 100px;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .profile-image {
   width: 100%;
-  max-width: 350px;
-  height: 253px !important;
+  height: 333px !important;
   /* border-radius: 0.3em; */
   box-shadow: 0 0.1rem 0.4rem;
   margin-bottom: 1em;
@@ -62,7 +61,7 @@ padding-right: 4em;
 }
 
 .pricing {
-  width: 74%;
+  width: 100%;
   background-color: rgb(226, 226, 226); 
   border: 1px solid #ccc;
   box-shadow: 0 0.1rem 0.4rem;
@@ -86,12 +85,13 @@ padding-right: 4em;
 
   .profile-image {
     margin-top: 35px;
-    width: auto;
+  }
+
+  .profile-layout {
+    margin-top: 10px;
   }
 
   .pricing {
-    width: 92%;
-    margin-left: 1em;
     border-radius: 0.2em;
   }
 

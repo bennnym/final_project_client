@@ -14,10 +14,14 @@ import { Spring } from "react-spring/renderprops";
 const GradCard = props => {
 	const [cardsData, setCardsData] = useState("");
 
-	useEffect(() => {
+	const _renderHomeCards = () => {
 		axios.get(links.root + "students/ending").then(res => {
 			setCardsData(res.data);
 		});
+	}
+
+	useEffect(() => {
+		_renderHomeCards()
 	}, []);
 
 	return (
@@ -35,7 +39,7 @@ const GradCard = props => {
 									let dif = new moment.duration(auctionEnd - timeNow);
 
 									if (dif > 0) {
-										return <HomeCard data={c} />;
+										return <HomeCard render={_renderHomeCards} data={c} />;
 									}
 							  })
 							: ""}

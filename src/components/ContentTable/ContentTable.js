@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Table } from 'react-bootstrap';
 import './ContentTable.css'
 import faker from 'faker';
@@ -6,17 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ContentTable = (props) => {
 
   const {
-    id,
-    auction_duration,
-    bids,
-    cv,
-    email,
     first_name,
     last_name,
+    email,
     gpa,
-    reserve_price,
     university,
   } = props.data;
+
+  const [experience, setExperience] = useState(false);
+  const [hobby, setHobby] = useState(false);
+  const [salary, setSalary] = useState(false);
 
   const formatNumber = num => {
     if (num) {
@@ -26,6 +25,29 @@ const ContentTable = (props) => {
       return "";
     }
   };
+
+  const _getExperience = () => {
+    const exp = faker.name.jobArea()
+    setExperience(exp)
+
+    return exp
+  }
+
+  const _getHobby = () => {
+    const hob = faker.hacker.ingverb()
+    setHobby(hob)
+
+    return hob
+  }
+
+  const _getSalary = () => {
+    const sal = formatNumber(faker.finance.amount(60000, 100000))
+    setSalary( sal)
+
+    return sal
+  }
+
+
 
   return(
     <div className="table-holder">
@@ -38,8 +60,8 @@ const ContentTable = (props) => {
         </thead>
       <tbody>
         <tr>
-          <td colSpan="2">Email:</td>
-          <td colSpan="1">{email}</td>
+          <td colSpan="2">Name:</td>
+          <td colSpan="1">{`${first_name} ${last_name}`}</td>
             <td colSpan="4">Australian Citizen:</td>
             <td colSpan="1"><FontAwesomeIcon style={{ color: "green" }} icon="check-circle" /></td>
 
@@ -67,21 +89,21 @@ const ContentTable = (props) => {
           </tr>
           <tr>
             <td colSpan="2">Previous Expirience:</td>
-            <td colSpan="1">{faker.name.jobArea()}</td>
+            <td colSpan="1">{ experience ? experience : _getExperience()}</td>
             <td colSpan="4">Industry Work Experience:</td>
             <td colSpan="1"><FontAwesomeIcon style={{ color: "red" }} icon="times-circle" /></td>
 
           </tr>
           <tr>
             <td colSpan="2">Hobby:</td>
-            <td id="hacker" colSpan="1">{faker.hacker.ingverb()}</td>
+            <td id="hacker" colSpan="1">{hobby? hobby : _getHobby()}</td>
             <td colSpan="4">Willing To Relocate:</td>
             <td colSpan="1"><FontAwesomeIcon style={{ color: "green" }} icon="check-circle" /></td>
 
           </tr>
           <tr>
             <td colSpan="2">Expected Salary:</td>
-            <td colSpan="1">${formatNumber(faker.finance.amount(60000, 100000))}</td>
+            <td colSpan="1">${salary ? salary : _getSalary()}</td>
             <td colSpan="4">GradBay Approved:</td>
             <td colSpan="1"><FontAwesomeIcon style={{ color: "green" }} icon="check-circle" /></td>
 
