@@ -31,8 +31,11 @@ const QuickOfferModal = props => {
 		setBidAmount(event.target.value);
 	};
 
+	const _handleEnter = (e) => {
+		if (e.key === "Enter") { makeBid() }
+	}
+
 	const makeBid = (e) => {
-		e.preventDefault()
 
 		if (!bidAmount){ return }
 		
@@ -66,7 +69,7 @@ const QuickOfferModal = props => {
 				show={show}
         onHide={_hideHandler}
 				bodyParagraph={
-					<Alert variant='danger'>
+					<Alert variant='danger' >
 						<Alert.Heading>Sorry, Your Offer Wasn't High Enough</Alert.Heading>
             <Button onClick={_bidAgain} className='offer-final' variant='danger'>
 							Make Another Offer
@@ -103,7 +106,7 @@ const QuickOfferModal = props => {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<InputGroup className='mb-3 quick-offer-input'>
+					<InputGroup onKeyDown={_handleEnter} className='mb-3 quick-offer-input'>
 						<InputGroup.Prepend>
 							<InputGroup.Text>$</InputGroup.Text>
 						</InputGroup.Prepend>
@@ -124,7 +127,7 @@ const QuickOfferModal = props => {
 							label='Commit To Offer'
 						/>
 					</Form.Group>
-					<Button onClick={makeBid} className='offer-final' variant='danger'>
+					<Button  onClick={makeBid} className='offer-final' variant='danger'>
 						Employ!
 					</Button>
 				</Modal.Body>

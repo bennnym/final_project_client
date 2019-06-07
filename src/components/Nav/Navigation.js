@@ -34,6 +34,7 @@ const Navigation = props => {
 		localStorage.setItem("email", "");
 		localStorage.setItem("student", "");
 		localStorage.setItem("employer", "");
+		localStorage.setItem("id", "");
 	};
 
 	return (
@@ -54,7 +55,7 @@ const Navigation = props => {
 					{props.employer || props.student ? (
 						<NavDropdown title='My Account' id='basic-nav-dropdown'>
 							{props.employer ? (
-								<Link className='dropdown-item' to='/watchlist'>
+								<Link className='dropdown-item' to='/myacc'>
 									Watchlist
 							</Link>
 							) : (

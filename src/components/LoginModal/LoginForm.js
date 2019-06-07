@@ -36,7 +36,10 @@ const LoginForm = ( props ) => {
         localStorage.setItem('employer', true)
         localStorage.setItem('email', email)
         setError(false)
-      } 
+      }
+      axios.post(links.root + 'getid', {email}).then((res)=> {
+        localStorage.setItem('id', res.data.id)
+      }) 
     })
     .catch( err => {
       axios

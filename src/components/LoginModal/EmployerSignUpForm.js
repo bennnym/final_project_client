@@ -50,8 +50,9 @@ const EmployerSignUpForm = props => {
 		axios
 			.post(links.root + "employer/create", request)
 			.then(res => {
-				if (res.status === 204) {
+				if (res.status === 200) {
 					setError(false);
+					localStorage.setItem("id", res.data.id);
 				}
 
 				axios

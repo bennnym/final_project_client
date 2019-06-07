@@ -1,0 +1,57 @@
+.tab-heading {
+	background-color: rgb(221, 221, 221);
+	margin-top: 15px;
+  padding: 5px;
+  padding-left: 10px;
+  border-radius: 0.5em;
+}
+.tab-card {
+	margin-top: 20px;
+}
+
+.tab-card-body {
+	height: auto;
+}
+
+.top-tabs .nav-link.active {
+	background-color: rgb(238, 238, 237);
+	border-left: 1px solid lightgrey;
+	border-right: 1px solid lightgrey;
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid rgb(238, 238, 237);
+}
+
+.nav-tabs {
+	margin-top: 20px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.side-tabs .nav-link.active {
+	background-color: lightgrey !important;
+	border-top-right-radius: 5em;
+	/* border-radius: .25rem; */
+	border-bottom-right-radius: 5em;
+}
+
+.side-tabs .nav-link:first-child {
+  margin-top: 10px;
+}
+
+.top-tabs:first-child {
+	padding-left: 15px;
+}
+
+.top-tabs .nav-link:hover {
+	border-left: 1px solid lightgrey;
+	border-right: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  	border-bottom: 1px solid rgb(238, 238, 237);
+}
+
+.nav-tabs a, .nav-pills a {
+  color: rgb(64,46,49) !important;
+}
+
+.tab-spans {
+  margin-left: 0;
+}

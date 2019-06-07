@@ -87,7 +87,7 @@ const SearchInput = props => {
           value={input}
           onChange={_getInput}
           onInputChange={handleInputChange}
-          
+          minLength="3"
 				/>
 				<Button  onClick={_handleSubmit} className='search-button-auctions' variant='outline-success'>
 					Go

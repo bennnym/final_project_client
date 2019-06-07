@@ -33,7 +33,7 @@ const GradCard = props => {
 				<div >
 					<CardGroup>
 						{cardsData
-							? _.first(cardsData, 4).map(c => {
+							? _.first(cardsData, 3).map(c => {
 									let timeNow = moment.utc();
 									let auctionEnd = moment(c.auction_duration);
 									let dif = new moment.duration(auctionEnd - timeNow);
