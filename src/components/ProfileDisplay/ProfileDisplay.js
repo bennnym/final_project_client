@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, OverlayTrigger, Popover } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import QuickOfferModal from "../QuickOfferModal/QuickOfferModal";
 import LoginForm from "../LoginModal/LoginForm";
 import _ from "underscore";
@@ -11,7 +11,6 @@ import axios from "axios";
 
 const ProfileDisplay = props => {
 	const [modalShow, setModalShow] = useState(false);
-	const [toggleHeart, setToggleHeart] = useState("true");
 
 	const {
 		id,

@@ -9,7 +9,7 @@ import axios from "axios";
 import links from "../links";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import "./Profile.css";
+import "../components/ProfileDisplay/Profile.css";
 
 const Profile = props => {
 	const [data, setData] = useState({});

@@ -39,7 +39,7 @@ const GradCard = props => {
 									let dif = new moment.duration(auctionEnd - timeNow);
 
 									if (dif > 0) {
-										return <HomeCard render={_renderHomeCards} data={c} />;
+										return <HomeCard key={c.id} render={_renderHomeCards	} data={c} />;
 									}
 							  })
 							: ""}

@@ -13,8 +13,8 @@ import logo from "../../assets/img/logo.png";
 import LoginModal from "../LoginModal/LoginModal";
 import LoginForm from "../LoginModal/LoginForm";
 import SignupForm from "../LoginModal/SignupForm";
-import { Link }	 from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Navigation = props => {
 	const [SignInModalShow, setSignInModalShow] = useState(false);
@@ -24,24 +24,27 @@ const Navigation = props => {
 	let SignUpModalClose = () => setSignUpModalShow(false);
 
 	const _logout = () => {
-		if (props.employer) { props.dispatch({ type: 'SETEMPLOYER' })}
-		if (props.student) { props.dispatch({ type: 'SETSTUDENT' })}
+		if (props.employer) {
+			props.dispatch({ type: "SETEMPLOYER" });
+		}
+		if (props.student) {
+			props.dispatch({ type: "SETSTUDENT" });
+		}
 		localStorage.setItem("jwt", "");
 		localStorage.setItem("email", "");
 		localStorage.setItem("student", "");
 		localStorage.setItem("employer", "");
 	};
 
-
 	return (
 		<Navbar bg='dark' variant='dark' expand='lg'>
-			<Link to="/" className="navbar-brand">
+			<Link to='/' className='navbar-brand'>
 				<img id='logo' src={logo} alt='logo' />
-				</Link>
+			</Link>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='mr-auto'>
-				<Link className="nav-link" to="/auctions">
+					<Link className='nav-link' to='/auctions'>
 						<FontAwesomeIcon icon='user-graduate' /> Auctions
 					</Link>
 					<Nav.Link href=''>
@@ -50,15 +53,25 @@ const Navigation = props => {
 
 					{props.employer || props.student ? (
 						<NavDropdown title='My Account' id='basic-nav-dropdown'>
-							{props.employer ? <NavDropdown.Item href='#action/3.1'>Watchlist</NavDropdown.Item> : <NavDropdown.Item href='#action/3.1'>Not Watchlist</NavDropdown.Item>}
-							
+							{props.employer ? (
+								<Link className='dropdown-item' to='/watchlist'>
+									Watchlist
+							</Link>
+							) : (
+								<NavDropdown.Item href='#action/3.1'>
+									Not Watchlist
+								</NavDropdown.Item>
+							)}
+
 							<NavDropdown.Item href='#action/3.2'>
 								Another action
 							</NavDropdown.Item>
 							<NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item>
 							<NavDropdown.Divider />
 							{/* <NavDropdown.Item  > */}
-								<Link className="dropdown-item" onClick={_logout} to="/">Logout</Link>
+							<Link className='dropdown-item' onClick={_logout} to='/'>
+								Logout
+							</Link>
 							{/* </NavDropdown.Item> */}
 						</NavDropdown>
 					) : (
@@ -83,21 +96,14 @@ const Navigation = props => {
 						header='Sign In'
 						show={SignInModalShow}
 						onHide={SignInModalClose}
-						form={
-							<LoginForm
-							
-							/>
-						}
+						form={<LoginForm />}
 					/>
 
 					<LoginModal
 						header='Sign Up'
 						show={SignUpModalShow}
 						onHide={SignUpModalClose}
-						form={
-							<SignupForm
-							/>
-						}
+						form={<SignupForm />}
 					/>
 				</Nav>
 				<Form inline>
@@ -113,12 +119,11 @@ const Navigation = props => {
 	);
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
 		student: state.student,
-		employer: state.employer
+		employer: state.employer,
 	};
-}
+};
 
 export default connect(mapStateToProps)(Navigation);
-

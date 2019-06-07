@@ -106,6 +106,15 @@ const SingleCard = props => {
 									/>
 								</p>
 								<p>
+									<Link
+										to={{
+											pathname: `/profile/${id}`,
+											state: {
+												id: id,
+											},
+										}}>
+										<Button>View Profile</Button>
+									</Link>
 								</p>
 							</div>
 						</div>

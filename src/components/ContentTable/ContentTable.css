@@ -1,6 +1,6 @@
 .table {
   margin: auto;
-  width: 92% !important;
+  width: 91% !important;
 }
 
 .table-holder {
@@ -15,7 +15,7 @@
 
 @media only screen and (max-width: 700px) {
 .table {
-  width: 95.2% !important;
+  width: 100% !important;
 }
 
 }

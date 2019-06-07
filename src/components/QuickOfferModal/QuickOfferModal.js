@@ -31,7 +31,11 @@ const QuickOfferModal = props => {
 		setBidAmount(event.target.value);
 	};
 
-	const makeBid = () => {
+	const makeBid = (e) => {
+		e.preventDefault()
+
+		if (!bidAmount){ return }
+		
 		const requestData = {
 			student_id: props.studentID,
 			employer_email: localStorage.email,
@@ -39,7 +43,6 @@ const QuickOfferModal = props => {
 		};
 
 		axios.post(links.root + "students/bid", requestData).then(res => {
-			console.log("this was the response", res);
 			if (res.status === 200) {
 				if (bids.length > 0) {
 					var high = +bidAmount > bids[0].amount ? true : false;
@@ -108,6 +111,8 @@ const QuickOfferModal = props => {
 							onChange={_getBidAmt}
 							type='number'
 							aria-label='Amount (to the nearest dollar)'
+							required="true"
+							data-toggle="validator"
 						/>
 					</InputGroup>
 

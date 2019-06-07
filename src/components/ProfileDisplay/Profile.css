@@ -46,7 +46,7 @@ display: inline-block;
 padding-right: 3em;
 /* margin-right: 13px; */
 width: 41%;
-text-align: right;
+text-align: left;
 padding-right: 4em;
 }
 
@@ -93,6 +93,7 @@ padding-right: 4em;
 
   .pricing {
     border-radius: 0.2em;
+    margin-bottom: 10px;
   }
 
   .price-display {

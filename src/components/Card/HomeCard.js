@@ -10,7 +10,6 @@ const HomeCard = ( props ) => {
   const { id, first_name, last_name, reserve_price, profile_photo, university, auction_duration, bids } = props.data
   const [modalShow, setModalShow] = useState(false);
 
-  const [day, setDays] = useState('');
   const [hour, setHours] = useState('');
   const [minute, setMinutes] = useState('');
   const [second, setSeconds] = useState('');
@@ -28,15 +27,12 @@ const HomeCard = ( props ) => {
       setMinutes(minutes)
       setSeconds(seconds)
     }, 1000)
-  }, [])
+  },[])
 
   const formatNumber = (num) => { //formats with commas
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
 			
-									
-
-
   return(
     <Card id="card-properties" className="mx-auto card-display" >
 
@@ -49,13 +45,15 @@ const HomeCard = ( props ) => {
       }}>
 
       <Card.Img id="card-image" variant="top" src={profile_photo} />
+      </Link>
+
       <Card.Body>
         <Card.Title>{first_name} {last_name}</Card.Title>
         <Card.Text> {university}</Card.Text>
         <Card.Text> <strong>${formatNumber( bids.length > 0 ? bids[0].amount : reserve_price )}</strong></Card.Text>
         <Card.Text id="timer">{hour}h {minute}m left </Card.Text>
         <Card.Text>Offers: { bids.length } </Card.Text>
-        <Button id="home-button" variant="primary" onClick={() => setModalShow(true)}>Make an Offer</Button>
+          <Button  id="home-button" variant="primary" onClick={() => setModalShow(true)}>Make an Offer</Button>
 
         <QuickOfferModal
           show={modalShow}
@@ -68,7 +66,6 @@ const HomeCard = ( props ) => {
         />
 
       </Card.Body>
-      </Link>
 
     </Card>
   );

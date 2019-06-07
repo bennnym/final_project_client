@@ -5,14 +5,13 @@ import axios from 'axios';
 import links from '../../links'
 
 const ShowCards = (props) => {
-  const [ gradData, setGradData ] = useState([])
+  const { gradData, setGradData } = props
 
   useEffect(() => {
     renderCards()
   }, [])
 
   const renderCards = () => {
-    console.log('this has run');
     axios
       .get(links.root + 'students')
       .then(res => {

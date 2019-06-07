@@ -5,3 +5,28 @@
   
   /* width: 50%; */
 }
+
+.input-group-prepend {
+}
+
+.rbt.clearfix.open {
+  width: 87%;
+}
+
+.search-button-auctions {
+  width: 7.5%;
+}
+
+@media only screen and (max-width: 991px) {
+.input-group-prepend {
+  display: none;
+}
+
+.rbt.clearfix.open {
+  width: 87%;
+}
+
+.search-button-auctions {
+  width: 13%;
+}
+}

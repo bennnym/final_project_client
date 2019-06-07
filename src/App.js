@@ -8,6 +8,7 @@ import Home from "./views/Home";
 import NoMatch from "./views/NoMatch";
 import Profile from "./views/Profile";
 import Auctions from "./views/Auctions";
+import Watchlist from "./views/Watchlist"
 //Font Awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -67,6 +68,15 @@ function App() {
 							/>
 						)}
 					/>
+						<Route
+							exact
+							path='/watchlist'
+							render={props => (
+								<Watchlist
+									{...props}
+								/>
+							)}
+						/>
 					<Route component={NoMatch} />
 				</Switch>
 			</Router>

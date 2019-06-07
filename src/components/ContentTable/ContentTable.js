@@ -4,11 +4,10 @@ import './ContentTable.css'
 import faker from 'faker';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ContentTable = (props) => {
-
+  
   const {
     first_name,
     last_name,
-    email,
     gpa,
     university,
   } = props.data;

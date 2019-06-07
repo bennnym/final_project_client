@@ -222,6 +222,7 @@ const StudentSignUpForm = props => {
 									placeholder='University'
 									name='university'
 									value={values.university}
+									maxLength="24"
 									// onChange={handleChange}
 									onChange={event => setUniversity(event.target.value)}
 									isInvalid={!!errors.university}

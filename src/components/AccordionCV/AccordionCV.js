@@ -4,37 +4,33 @@ import "./AccordionCV.css";
 
 const AccordionCV = props => {
 
-	const _toggle = () => {};
+	const [ toggleKey, setToggleKey ] = useState('')
+
+	const _toggle = () => {
+		setToggleKey(!toggleKey)
+	};
 
 	return (
-		<Accordion defaultActiveKey='3'>
+		<Accordion defaultActiveKey={false}>
 			<Card>
 				<Card.Header>
 					<Accordion.Toggle
-						onClick={_toggle}
 						as={Button}
 						variant='outline-success'
-						eventKey={true}>
+						eventKey={true}
+						onClick={() => _toggle()}
+						>
 						View CV
 					</Accordion.Toggle>
 				</Card.Header>
-				<Accordion.Collapse as={Button} eventKey={true}>
+				<Accordion.Collapse onClick={() => _toggle()} as={Button} eventKey={toggleKey}>
 					<Card.Body>
 						{" "}
-						<iframe src={props.cv} />
+						<iframe title="CV Contents" src={props.cv} />
 					</Card.Body>
 				</Accordion.Collapse>
 			</Card>
-			{/* <Card >
-        <Card.Header>
-          <Accordion.Toggle as={Button} variant="link" eventKey={false}>
-            View CV
-      </Accordion.Toggle>
-        </Card.Header>
-        <Accordion.Collapse as={Button} eventKey={false}>
-          <Card.Body> <iframe src={props.cv} /></Card.Body>
-        </Accordion.Collapse>
-      </Card> */}
+
 		</Accordion>
 	);
 };
