@@ -41,7 +41,7 @@ const HomeCard = ( props ) => {
         pathname: `/profile/${id}`,
         state: {
           id: id,
-        },
+        }
       }}>
 
       <Card.Img id="card-image" variant="top" src={profile_photo} />

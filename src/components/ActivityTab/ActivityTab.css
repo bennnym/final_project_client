@@ -1,9 +1,9 @@
 .tab-heading {
 	background-color: rgb(221, 221, 221);
 	margin-top: 15px;
-  padding: 5px;
-  padding-left: 10px;
-  border-radius: 0.5em;
+	padding: 5px;
+	padding-left: 10px;
+	border-radius: 0.5em;
 }
 .tab-card {
 	margin-top: 20px;
@@ -34,7 +34,7 @@
 }
 
 .side-tabs .nav-link:first-child {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 
 .top-tabs:first-child {
@@ -44,14 +44,62 @@
 .top-tabs .nav-link:hover {
 	border-left: 1px solid lightgrey;
 	border-right: 1px solid lightgrey;
-  border-top: 1px solid lightgrey;
-  	border-bottom: 1px solid rgb(238, 238, 237);
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid rgb(238, 238, 237);
 }
 
-.nav-tabs a, .nav-pills a {
-  color: rgb(64,46,49) !important;
+.nav-tabs a,
+.nav-pills a {
+	color: rgb(64, 46, 49) !important;
 }
 
 .tab-spans {
-  margin-left: 0;
+	margin-left: 0;
+	font-size: 11px;
+}
+
+.upper-row {
+	margin-bottom: 15px;
+}
+
+.tab-small-headings {
+	font-weight: 700;
+}
+
+.tab-spans.header {
+	margin-left: 0;
+	font-size: 1rem;
+	text-transform: uppercase;
+}
+
+.middle-box {
+	padding-left: 35px;
+	line-height: 2rem;
+}
+
+.right-box {
+	line-height: 2rem;
+}
+
+.offer-image img {
+	height: 100px;
+	width: 145px;
+}
+
+.won {
+	color: green;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.lost {
+	color: red;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.live {
+	color: blue;
+	text-transform: uppercase;
+	font-weight: 800;
 }
