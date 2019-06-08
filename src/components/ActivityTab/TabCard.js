@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import "./ActivityTab.css";
-import moment from "moment";
 import { Link } from "react-router-dom";
 
 const TabCard = props => {
@@ -15,7 +14,9 @@ const TabCard = props => {
 		email,
 		status,
 		salePrice,
-		studentID,
+    studentID,
+		bidCount,
+		list
 	} = props;
 
 	return (
@@ -31,7 +32,7 @@ const TabCard = props => {
 						<div className='tab-small-headings'>${bidAmount}</div>
 					</Col>
 				</Row>
-				<Row>
+				<Row className='offer-card'>
 					<Col className='offer-image' xs={2}>
 						<img src={profilePhoto} alt='holder' />
 					</Col>
@@ -46,7 +47,11 @@ const TabCard = props => {
 						<div>
 							Status: <span className={status}>{status}</span>
 						</div>
-						<div>Sale Price: ${salePrice} </div>
+            <div>
+              Offers: {bidCount}
+            </div>
+            { salePrice && !list ? 
+							<div>Sale Price: <span className='tab-small-headings'>${salePrice}</span>  </div> : <div>Reserve Price: <span className='tab-small-headings'>${salePrice}</span>  </div>}
 						{status === "live" ? (
 							<div>
 								<Link

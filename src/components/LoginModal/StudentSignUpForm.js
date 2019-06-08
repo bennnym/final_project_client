@@ -121,15 +121,16 @@ const StudentSignUpForm = props => {
 					setError(false);
 					timeDisplay(auction_duration);
 					setLoading(false);
+					props.dispatch({ type: 'SETSTUDENT' })
+					// localStorage.setItem("jwt", res.data.jwt);
+					localStorage.setItem("student", true);
+					localStorage.setItem("email", email);
 				}
 
 				axios
 					.post(links.root + "student_token", { auth: { email, password } })
 					.then(res => {
-						props.dispatch({ type: 'SETSTUDENT' })
-						localStorage.setItem("jwt", res.data.jwt);
-						localStorage.setItem("student", true);
-						localStorage.setItem("email", email);
+					
 					});
 			})
 			.catch(err => {

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Nav, Col, Row, Tab } from 'react-bootstrap';
 import OfferTab from './OfferTab'
+import EmployedTab from './EmployedTab'
+import WatchlistTab from './WatchlistTab'
 
 const ActivityTab = (props) => {
   return(
@@ -25,10 +27,10 @@ const ActivityTab = (props) => {
               <OfferTab />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-
+              <EmployedTab />
             </Tab.Pane>
             <Tab.Pane eventKey="third">
-              
+              <WatchlistTab />
             </Tab.Pane>
           </Tab.Content>
         </Col>

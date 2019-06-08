@@ -53,15 +53,16 @@ const EmployerSignUpForm = props => {
 				if (res.status === 200) {
 					setError(false);
 					localStorage.setItem("id", res.data.id);
+					props.dispatch({ type: 'SETEMPLOYER' })
+					// localStorage.setItem("jwt", res.data.jwt);
+					localStorage.setItem("employer", true);
+					localStorage.setItem("email", email);
 				}
 
 				axios
 					.post(links.root + "employer_token", { auth: { email, password } })
 					.then(res => {
-						props.dispatch({ type: 'SETEMPLOYER' })
-						localStorage.setItem("jwt", res.data.jwt);
-						localStorage.setItem("employer", true);
-						localStorage.setItem("email", email);
+						
 					});
 			})
 			.catch(err => {

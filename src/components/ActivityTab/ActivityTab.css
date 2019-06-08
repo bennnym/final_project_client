@@ -67,6 +67,7 @@
 }
 
 .tab-spans.header {
+	font-weight: 800;
 	margin-left: 0;
 	font-size: 1rem;
 	text-transform: uppercase;
@@ -92,7 +93,7 @@
 	font-weight: 800;
 }
 
-.lost {
+.lost, .ended {
 	color: red;
 	text-transform: uppercase;
 	font-weight: 800;
@@ -102,4 +103,63 @@
 	color: blue;
 	text-transform: uppercase;
 	font-weight: 800;
+}
+
+.empty {
+	min-height: 458px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.nav-pills.active {
+  color: red !important;
+}
+
+@media only screen and (max-width: 700px) {
+	.upper-row {
+		display: flex;
+		justify-content: end;
+		flex-direction: row;
+	}
+
+	.empty {
+		min-height: 220px;
+	}
+
+	.upper-row .col-4 {
+		flex: 0 0 50%;
+	}
+
+	.middle-box {
+		padding-left: 0;
+	}
+
+	div.right-box {
+		padding-left: 0;
+	}
+
+	.upper-row > div {
+		max-width: 50%;
+	}
+
+	.middle-box > div {
+		max-width: 100%;
+	}
+
+	.offer-image {
+		max-width: 100%;
+	}
+
+	.right-box {
+		max-width: 100%;
+	}
+
+	.right-box > div {
+		max-width: 100%;
+	}
+
+	.tab-card-body > div {
+		text-align: center;
+	}
 }

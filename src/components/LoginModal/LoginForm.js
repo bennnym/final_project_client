@@ -29,6 +29,7 @@ const LoginForm = ( props ) => {
     axios
     .post(links.root + 'employer_token', request )
     .then( res => {
+      
       if ( res.status === 201 ){
         setLoggedIn( true )
         props.dispatch({ type: 'SETEMPLOYER' })
