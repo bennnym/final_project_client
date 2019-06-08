@@ -8,8 +8,8 @@ import moment from "moment";
 import links from "../../../src/links";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux'
-import SignUpProfile from './SignUpProfile'
+import { connect } from "react-redux";
+import SignUpProfile from "./SignUpProfile";
 
 const schema = yup.object({
 	firstName: yup.string().required(),
@@ -39,7 +39,6 @@ const schema = yup.object({
 	passwordConfirmation: yup
 		.string()
 		.oneOf([yup.ref("password"), null], "Passwords must match"),
-
 });
 
 const StudentSignUpForm = props => {
@@ -121,16 +120,15 @@ const StudentSignUpForm = props => {
 					setError(false);
 					timeDisplay(auction_duration);
 					setLoading(false);
-					props.dispatch({ type: 'SETSTUDENT' })
-					// localStorage.setItem("jwt", res.data.jwt);
-					localStorage.setItem("student", true);
-					localStorage.setItem("email", email);
 				}
 
 				axios
 					.post(links.root + "student_token", { auth: { email, password } })
 					.then(res => {
-					
+						props.dispatch({ type: "SETSTUDENT" });
+						localStorage.setItem("jwt", res.data.jwt);
+						localStorage.setItem("student", true);
+						localStorage.setItem("email", email);
 					});
 			})
 			.catch(err => {
@@ -223,7 +221,7 @@ const StudentSignUpForm = props => {
 									placeholder='University'
 									name='university'
 									value={values.university}
-									maxLength="24"
+									maxLength='24'
 									// onChange={handleChange}
 									onChange={event => setUniversity(event.target.value)}
 									isInvalid={!!errors.university}
@@ -296,7 +294,7 @@ const StudentSignUpForm = props => {
 								<Form.Label>Upload a Profile Photo</Form.Label>
 								<Form.Control
 									type='file'
-									accept=".jpg, .jpeg, .png"
+									accept='.jpg, .jpeg, .png'
 									name='profile-photo'
 									value={values.profilePhoto}
 									// onChange={handleChange}
@@ -314,7 +312,7 @@ const StudentSignUpForm = props => {
 								<Form.Label>Upload a CV</Form.Label>
 								<Form.Control
 									type='file'
-									accept=".pdf"
+									accept='.pdf'
 									name='cv'
 									value={values.cv}
 									onChange={event => setCV(event.target.files[0])}
@@ -392,7 +390,6 @@ const StudentSignUpForm = props => {
 		);
 	} else if (error === false) {
 		return (
-
 			<SignUpProfile
 				profilePhoto={profilePhoto}
 				reserve={reserve}
@@ -401,15 +398,15 @@ const StudentSignUpForm = props => {
 				minute={minute}
 				second={second}
 				id={id}
-				/>
+			/>
 		);
 	}
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
 		student: state.student,
 	};
-}
+};
 
 export default connect(mapStateToProps)(StudentSignUpForm);

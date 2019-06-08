@@ -24,11 +24,11 @@ const TabCard = props => {
 			<Card.Body className='tab-card-body'>
 				<Row className='upper-row'>
 					<Col xs={8}>
-						<span className='tab-spans'>OFFER DATE</span>
+						<span className='tab-spans'>{list ? "AUCTION END" : "OFFER DATE"}</span>
 						<div className='tab-small-headings'>{date}</div>
 					</Col>
 					<Col xs={4}>
-						<span className='tab-spans'>OFFER AMOUNT</span>
+						<span className='tab-spans'>{list ? "TOP OFFER" : "OFFER AMOUNT" }</span>
 						<div className='tab-small-headings'>${bidAmount}</div>
 					</Col>
 				</Row>
@@ -51,7 +51,7 @@ const TabCard = props => {
               Offers: {bidCount}
             </div>
             { salePrice && !list ? 
-							<div>Sale Price: <span className='tab-small-headings'>${salePrice}</span>  </div> : <div>Reserve Price: <span className='tab-small-headings'>${salePrice}</span>  </div>}
+							<div>Sale Price: <span className='tab-small-headings'>${salePrice}</span>  </div> : list ? <div>Reserve Price: <span className='tab-small-headings'>${salePrice}</span>  </div> : <></>}
 						{status === "live" ? (
 							<div>
 								<Link

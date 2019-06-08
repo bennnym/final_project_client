@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import "./LoginModal.css";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 import links from "../../links";
 
@@ -25,7 +25,6 @@ const schema = yup.object({
 });
 
 const EmployerSignUpForm = props => {
-
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -53,16 +52,15 @@ const EmployerSignUpForm = props => {
 				if (res.status === 200) {
 					setError(false);
 					localStorage.setItem("id", res.data.id);
-					props.dispatch({ type: 'SETEMPLOYER' })
-					// localStorage.setItem("jwt", res.data.jwt);
-					localStorage.setItem("employer", true);
-					localStorage.setItem("email", email);
+					props.dispatch({ type: "SETEMPLOYER" });
 				}
 
 				axios
 					.post(links.root + "employer_token", { auth: { email, password } })
 					.then(res => {
-						
+						localStorage.setItem("jwt", res.data.jwt);
+						localStorage.setItem("employer", true);
+						localStorage.setItem("email", email);
 					});
 			})
 			.catch(err => {
@@ -238,11 +236,10 @@ const EmployerSignUpForm = props => {
 	}
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
-		employer: state.employer
+		employer: state.employer,
 	};
-}
+};
 
 export default connect(mapStateToProps)(EmployerSignUpForm);
-

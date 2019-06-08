@@ -50,7 +50,7 @@ const WatchlistTab = () => {
             auction_duration,
             reserve_price
           } = student_info.student;
-          const OfferDate = moment(created_at)
+          const offerDate = moment(auction_duration)
             .format()
             .slice(0, 10);
           
@@ -58,7 +58,7 @@ const WatchlistTab = () => {
           return (
             <TabCard
               list="watch"
-              date={OfferDate}
+              date={offerDate}
               bidAmount={formatNumber(student_info.current_price > reserve_price ? student_info.current_price : reserve_price)}
               profilePhoto={profile_photo}
               firstName={first_name}
