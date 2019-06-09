@@ -8,6 +8,7 @@ import "./ProfileDisplay.css";
 import links from "../../links";
 import { connect } from "react-redux";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ProfileDisplay = props => {
 	const [modalShow, setModalShow] = useState(false);
@@ -118,68 +119,88 @@ const ProfileDisplay = props => {
 			<h1 className='profile-name'>
 				{first_name} {last_name}
 			</h1>
+
 			<div className='pricing'>
-				{bids ? (
-					<div className='price-display'>
-						<div className='text-col'>Last price:</div>{" "}
-						<span className='last-price price '>${getLastPrice(bids)}</span>
-					</div>
-				) : (
-					""
-				)}
-				{bids ? (
-					<div className='price-display'>
-						<div className='text-col'>Price now:</div>
-						<span className='price-now price'>${getTopPrice(bids)}</span>
-					</div>
-				) : (
-					""
-				)}
-				{bids ? (
-					<div className='price-display offer'>
-						<div className='text-col'>Offers:</div>
-						<span className='price'>{getBids(bids)}</span>
-					</div>
-				) : (
-					""
-				)}
-				{bids ? (
-					<div className='price-display offer'>
-						<div className='text-col'>Top Offer:</div>
-						<span className='price'>{getTopOffer(bids)}</span>
-					</div>
-				) : (
-					""
-				)}
-
-				<div className='price-display buttons'>
-					<Button onClick={() => setModalShow(true)}>Make An Offer</Button>
+				<div className='pricing-col-one'>
+					{bids ? (
+						<div className='price-display'>
+							<div className='text-col'>Last price:</div>{" "}
+							<span className='last-price price '>${getLastPrice(bids)}</span>
+						</div>
+					) : (
+						""
+					)}
+					{bids ? (
+						<div className='price-display'>
+							<div className='text-col'>Price now:</div>
+							<span className='price-now price'>${getTopPrice(bids)}</span>
+						</div>
+					) : (
+						""
+					)}
+					{bids ? (
+						<div className='price-display offer'>
+							<div className='text-col'>Offers:</div>
+							<div className='price'>{getBids(bids)}</div>
+						</div>
+					) : (
+						""
+					)}
+					{bids ? (
+						<div className='price-display offer'>
+							<div className='text-col'>Top Offer:</div>
+							<span className='price'>{getTopOffer(bids)}</span>
+						</div>
+					) : (
+						""
+					)}
 				</div>
-
-				<QuickOfferModal
-					show={modalShow}
-					studentID={id}
-					onHide={() => setModalShow(false)}
-					form={<LoginForm />}
-					renderCards={props.renderProfile}
-					bids={bids}
-					reservePrice={reserve_price}
-				/>
-
-				{props.employer ? (
+				<div className='pricing-col-two'>
 					<div className='price-display buttons'>
-						{watchlists ? (
-							renderWatching()
+						<Button onClick={() => setModalShow(true)}>Make An Offer</Button>
+					</div>
+
+					<QuickOfferModal
+						show={modalShow}
+						studentID={id}
+						onHide={() => setModalShow(false)}
+						form={<LoginForm />}
+						renderCards={props.renderProfile}
+						bids={bids}
+						reservePrice={reserve_price}
+					/>
+
+					{props.employer ? (
+						<div className='price-display buttons'>
+							{watchlists ? (
+								renderWatching()
+							) : (
+								<Button onClick={_updateWatchlist} variant='outline-danger'>
+									Add To Watchlist{" "}
+									<FontAwesomeIcon className='heart' icon='heart' />
+								</Button>
+							)}
+						</div>
+					) : (
+						<></>
+					)}
+					<div className='price-display buttons message-button'>
+						{first_name ? (
+							<Link
+								to={{
+									pathname: `/myacc`,
+									state: {
+										id: id,
+										name: `${first_name} ${last_name}`
+									},
+								}}>
+								<Button variant="warning">{`Message ${first_name}`}</Button>
+							</Link>
 						) : (
-							<Button onClick={_updateWatchlist} variant='outline-danger'>
-								Add To Watchlist{" "}
-								<FontAwesomeIcon className='heart' icon='heart' />
-							</Button>
+								<Button variant="warning">Message </Button>
 						)}
 					</div>
-				) : (
-					<></>
-				)}
+				</div>
 			</div>
 		</div>
 	);

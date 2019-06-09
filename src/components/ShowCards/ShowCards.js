@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { CardGroup } from 'react-bootstrap';
 import SingleCard from './SingleCard'
 import axios from 'axios';

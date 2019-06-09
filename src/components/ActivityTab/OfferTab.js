@@ -67,6 +67,7 @@ const OfferTab = () => {
 
 					return (
 						<TabCard
+							key={{first_name}+{last_name}+{profile_photo}}
 							date={OfferDate}
 							bidAmount={formatNumber(student_info.bid.amount)}
 							profilePhoto={profile_photo}

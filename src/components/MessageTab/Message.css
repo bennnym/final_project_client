@@ -1,0 +1,37 @@
+.message-content {
+	margin-top: 15px;
+	padding: 4px;
+	overflow-y: auto;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+}
+
+.message-input {
+	margin-bottom: 15px;
+}
+
+.student {
+	align-self: flex-end;
+	width: 50%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	background-color: burlywood;
+	border-radius: 1rem;
+}
+
+.employer {
+	align-self: flex-start;
+	width: 50%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	background-color: cadetblue;
+	border-radius: 1rem;
+}
+
+.student h6, .employer h6 {
+  text-transform: uppercase;
+  font-size: 11px;
+}

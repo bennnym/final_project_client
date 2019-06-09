@@ -57,6 +57,8 @@ const WatchlistTab = () => {
 
           return (
             <TabCard
+              key={{ first_name } + { last_name } + { profile_photo }}
+
               list="watch"
               date={offerDate}
               bidAmount={formatNumber(student_info.current_price > reserve_price ? student_info.current_price : reserve_price)}
