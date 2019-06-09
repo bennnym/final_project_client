@@ -1,62 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import SingleMessage from "./SingleMessage";
 import "./Message.css";
 import _ from "underscore";
 import { databaseRef } from "../../config/firebase";
-import axios from 'axios';
-import links from '../../links'
+import axios from "axios";
+import links from "../../links";
 import { connect } from "react-redux";
-import moment from 'moment';
+import moment from "moment";
 
 const MessagePanel = props => {
 	const [msgContentKeys, setMsgContentKeys] = useState("");
 	const [input, setInput] = useState("");
-	const [company, setCompany] = useState("")
+	const [company, setCompany] = useState("");
 
 	useEffect(() => {
-		getMsgContent()
-		getEmployerInfo()
-	},[]);
+		getMsgContent();
+		getEmployerInfo();
+	}, []);
 
 	const getMsgContent = () => {
-		setMsgContentKeys(_.keys(props.messageContent));
-	}
+		setMsgContentKeys(_.keys(props.messageContent).reverse());
+	};
 
 	const getEmployerInfo = () => {
-		axios.get(links.root + `employer/${props.employerID}`).then((res) => {
-			setCompany(res.data.company)
+		axios.get(links.root + `employer/${props.employerID}`).then(res => {
+			setCompany(res.data.company);
 		});
-	}
+	};
 
 	const _getInput = e => {
 		setInput(e.target.value);
 	};
 
-	const _handleClick = () => {
+	const _handleEnter = e => {
+		if (e.key === "Enter") {
+			_handleClick();
+		}
+	};
 
+	const _handleClick = () => {
 		const messageObj = {
 			content: input,
 			employer_name: company,
 			employer_read: props.employer,
-			from: props.employer ? 'employer' : 'student',
+			from: props.employer ? "employer" : "student",
 			from_employer: props.employer,
 			from_student: props.student,
 			student_name: props.studentName,
 			student_read: props.student,
-		}
+		};
 
-		const firebaseRef = databaseRef.child(props.employerID).child(`${props.studentID}-${props.studentName}`).child(moment().format())
-			
-		const otherRef = databaseRef.child(props.employerID).child(`${props.studentID}-${props.studentName}`)
+		const firebaseRef = databaseRef
+			.child(props.employerID)
+			.child(`${props.studentID}-${props.studentName}`)
+			.child(moment().format());
 
-		otherRef.on('value', snapshot => {
-	
-			setMsgContentKeys(_.keys(snapshot.val()))
-		})
+		const otherRef = databaseRef
+			.child(props.employerID)
+			.child(`${props.studentID}-${props.studentName}`);
 
-		firebaseRef.set(messageObj)
+		otherRef.on("value", snapshot => {
+			setMsgContentKeys(_.keys(snapshot.val()).reverse()); // reverse shows the last message first
+		});
 
+		firebaseRef.set(messageObj);
+		setInput(""); // clear the input
 	};
 
 	return (
@@ -82,9 +91,11 @@ const MessagePanel = props => {
 			<InputGroup className='message-input'>
 				<InputGroup.Prepend />
 				<FormControl
+					onKeyDown={_handleEnter}
 					onChange={_getInput}
 					as='textarea'
 					aria-label='With textarea'
+					value={input}
 				/>
 				<Button onClick={_handleClick} variant='dark'>
 					Send

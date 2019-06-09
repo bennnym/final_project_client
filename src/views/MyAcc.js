@@ -9,8 +9,7 @@ import { Redirect } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 
 const MyAcc = props => {
-
-	if (!props.employer) {
+	if (!props.employer && !props.student) {
 		return <Redirect to='/' />;
 	}
 
@@ -20,17 +19,27 @@ const MyAcc = props => {
 			<Layout>
 				<Tabs
 					className='top-tabs'
-					defaultActiveKey={ props.location.state ? 'messages' : 'activity'}
+					defaultActiveKey={props.location.state ? "messages" : "activity"}
 					id='uncontrolled-tab-example'>
-					<Tab eventKey='activity' title='Activity'>
-						<ActivityTab />
-					</Tab>
+					{props.employer ? (
+						<Tab eventKey='activity' title='Activity'>
+							<ActivityTab />{" "}
+						</Tab>
+					) : (
+						""
+					)}
+
 					<Tab eventKey='messages' title='Messages'>
-						<MessageTab
-						newMessage={ props.location.state ? true : false }
-						studentName={ props.location.state ? props.location.state.name : ''}
-						studentID={ props.location.state ? props.location.state.id : ''}
-						 />
+						{props.employer ? (
+							<MessageTab
+								newMessage={props.location.state ? true : false}
+								studentName={
+									props.location.state ? props.location.state.name : ""
+								}
+								studentID={props.location.state ? props.location.state.id : ""}
+							/>
+						) : ( ''
+						)}
 					</Tab>
 					<Tab eventKey='account' title='Account' />
 				</Tabs>
@@ -43,6 +52,7 @@ const MyAcc = props => {
 const mapStateToProps = state => {
 	return {
 		employer: state.employer,
+		student: state.student,
 	};
 };
 

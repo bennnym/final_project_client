@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ActivityTab.css";
 import TabCard from "./TabCard";
-import EmptyTab from './EmptyTab'
+import EmptyTab from "./EmptyTab";
 import axios from "axios";
 import links from "../../links";
 import moment from "moment";
@@ -30,44 +30,45 @@ const EmployedTab = () => {
 			.then(res => {
 				setOfferData(res.data);
 			});
-  };
+	};
 	return (
 		<React.Fragment>
 			<div className='tab-heading'>Employed</div>
-      {offerData.length > 0 ? (
-        offerData.map(student_info => {
-          const { created_at } = student_info.bid;
-          const {
-            profile_photo,
-            first_name,
-            last_name,
-            university,
-            email,
-            id,
-            reserve_price
-          } = student_info.student;
-          const OfferDate = moment(created_at)
-            .format()
-            .slice(0, 10);
+			{offerData.length > 0 ? (
+				offerData.map((student_info, index) => {
+					const { created_at } = student_info.bid;
+					const {
+						profile_photo,
+						first_name,
+						last_name,
+						university,
+						email,
+						id,
+						reserve_price,
+					} = student_info.student;
+					const OfferDate = moment(created_at)
+						.format()
+						.slice(0, 10);
 
-          return (
-            <TabCard
-              date={OfferDate}
-              bidAmount={formatNumber(student_info.bid.amount)}
-              profilePhoto={profile_photo}
-              firstName={first_name}
-              lastName={last_name}
-              university={university}
-              email={email}
-              status={"won"}
-              studentID={id}
-              bidCount={student_info.bid_count}
-            />
-          );
-        })
-      ) : (
-          <EmptyTab />
-        )}
+					return (
+						<TabCard
+							key={{ first_name } + index.toString()}
+							date={OfferDate}
+							bidAmount={formatNumber(student_info.bid.amount)}
+							profilePhoto={profile_photo}
+							firstName={first_name}
+							lastName={last_name}
+							university={university}
+							email={email}
+							status={"won"}
+							studentID={id}
+							bidCount={student_info.bid_count}
+						/>
+					);
+				})
+			) : (
+				<EmptyTab />
+			)}
 		</React.Fragment>
 	);
 };

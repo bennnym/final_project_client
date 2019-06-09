@@ -117,6 +117,7 @@ const StudentSignUpForm = props => {
 					const { profile_photo, id, auction_duration } = res.data;
 					setProfilePhoto(profile_photo);
 					setId(id);
+					localStorage.setItem("studentID", id)
 					setError(false);
 					timeDisplay(auction_duration);
 					setLoading(false);

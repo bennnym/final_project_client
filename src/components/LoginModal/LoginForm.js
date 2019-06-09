@@ -53,7 +53,11 @@ const LoginForm = ( props ) => {
           localStorage.setItem('student', true )
           localStorage.setItem('email', email)
           setError(false)
-        } 
+        }
+        axios.post(links.root + 'studentid', {email}).then((res) => {
+          localStorage.setItem('studentID', res.data.id)
+         
+        }) 
       }).catch( err => {
         setError( true )
       })

@@ -38,7 +38,7 @@ const WatchlistTab = () => {
     <React.Fragment>
         <div className='tab-heading'>Watchlist</div>
       {offerData.length > 0 ? (
-        offerData.map(student_info => {
+        offerData.map((student_info, index) => {
           const { created_at } = student_info.watchlist;
           const {
             profile_photo,
@@ -57,8 +57,7 @@ const WatchlistTab = () => {
 
           return (
             <TabCard
-              key={{ first_name } + { last_name } + { profile_photo }}
-
+              key={{ first_name } + (index + 2).toString() }
               list="watch"
               date={offerDate}
               bidAmount={formatNumber(student_info.current_price > reserve_price ? student_info.current_price : reserve_price)}

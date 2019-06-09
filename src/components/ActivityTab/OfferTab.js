@@ -51,7 +51,7 @@ const OfferTab = () => {
 		<React.Fragment>
 			<div className='tab-heading'>Offers</div>
 			{offerData.length > 0 ? (
-				offerData.map(student_info => {
+				offerData.map((student_info, index) => {
 					const { created_at } = student_info.student_bids;
 					const {
 						profile_photo,
@@ -67,7 +67,7 @@ const OfferTab = () => {
 
 					return (
 						<TabCard
-							key={{first_name}+{last_name}+{profile_photo}}
+							key={{first_name}+(index + 1).toString()}
 							date={OfferDate}
 							bidAmount={formatNumber(student_info.bid.amount)}
 							profilePhoto={profile_photo}
