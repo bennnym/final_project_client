@@ -10,6 +10,7 @@ import { Tabs, Tab } from "react-bootstrap";
 
 const MyAcc = props => {
 	const [newMsg, setnewMsg] = useState(props.location.state ? true : false)
+	console.log('this is newMsg', newMsg)
 
 	if (!props.employer && !props.student) {
 		return <Redirect to='/' />;
@@ -36,7 +37,7 @@ const MyAcc = props => {
 					<Tab eventKey='messages' title='Messages'>
 						{props.employer ? (
 							<MessageTab
-								newMessage={newMsg}
+								newMsg={newMsg}
 								setNewMsg={setnewMsg}
 								studentName={
 									props.location.state ? props.location.state.name : ""

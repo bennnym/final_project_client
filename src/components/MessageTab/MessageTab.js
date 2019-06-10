@@ -19,17 +19,18 @@ const MessageTab = props => {
 		// they have clicked here from the profile page and are looking to send a message
   }, []);
   
+  console.log('here it is in the tab', props.newMsg)
 
 	const renderMessages = () => {
 		if (props.employer) {
 			const newRef = databaseRef.child(employerID);
 
 			if (props.newMsg) {
-        console.log('CREATING OR DELETING!')
 				newRef
 					.child(`${studentID}-${props.studentName}`)
           .set(moment().format());
           props.setNewMsg(false)
+          console.log('should change it here')
 			}
 
 			newRef.on("value", snapshot => {
@@ -37,7 +38,10 @@ const MessageTab = props => {
 					// there are no messages so we probably need to create one with the new student we are attempting to mesage
 					newRef
 						.child(`${studentID}-${props.studentName}`)
-						.set(moment().format());
+            .set(moment().format());
+
+          props.setNewMsg(false)
+
 
 					// student id in the format of num-name
 				}
@@ -77,7 +81,7 @@ const MessageTab = props => {
 			<Row>
 				<Col sm={2}>
 					<Nav variant='pills' className='flex-column side-tabs'>
-						{keysForMsgObj.length >= 1 ? (
+						{keysForMsgObj.length >= 1 && messages ? (
 							keysForMsgObj.map((key, index) => {
 								if (props.employer) {
 									let name = key.split("-")[1]; // gets full name
@@ -107,7 +111,7 @@ const MessageTab = props => {
 
 				<Col sm={10}>
 					<Tab.Content>
-						{keysForMsgObj.length >= 1 ? (
+						{keysForMsgObj.length >= 1 && messages ? (
 							keysForMsgObj.map((key, index) => {
 								if (props.employer) {
 									let name = key.split("-")[1];
