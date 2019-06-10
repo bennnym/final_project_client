@@ -12,14 +12,14 @@ const MessageTab = props => {
 	const [studentID] = useState(props.studentID);
 	const [messages, setMessages] = useState("");
 	const [keysForMsgObj, setKeysForMsgObj] = useState("");
-	const [studentKey, setStudentKey] = useState("");
+  const [studentKey, setStudentKey] = useState("");
 
 	useEffect(() => {
 		renderMessages();
 		// they have clicked here from the profile page and are looking to send a message
-	}, []);
+  }, []);
+  
 
-	console.log("here it is in the tab", props.newMsg);
 
 	const renderMessages = () => {
 		if (props.employer) {
@@ -33,7 +33,7 @@ const MessageTab = props => {
 			}
 
 			newRef.on("value", snapshot => {
-				if (snapshot.val() === null && studentID ) {
+				if (snapshot.val() === null && studentID) {
 					// there are no messages so we probably need to create one with the new student we are attempting to mesage
 					newRef
 						.child(`${studentID}-${props.studentName}`)
@@ -50,7 +50,7 @@ const MessageTab = props => {
 		} else if (props.student) {
 			// need to find all the messages to that student and who they are from etc
 			// end goal is to feed in the keys and object for the students emails they have got!
-			databaseRef.on("value", snapshot => {
+			databaseRef.once("value").then( snapshot => {
 				let data = snapshot.val();
 
 				let keys = _.keys(data);
@@ -96,7 +96,7 @@ const MessageTab = props => {
 								} else if (props.student) {
 									let keys = _.keys(messages[key][studentKey]);
 									let name =
-										messages[key][studentKey][keys[0]]["employer_name"];
+                    messages[key][studentKey][keys[0]] ? messages[key][studentKey][keys[0]]["employer_name"] : 'Incoming Message'
 									return (
 										<Nav.Item key={index}>
 											<Nav.Link eventKey={index}>{name}</Nav.Link>
