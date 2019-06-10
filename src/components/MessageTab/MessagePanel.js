@@ -59,7 +59,7 @@ const MessagePanel = props => {
 				student_read: student,
 			};
 		} else if (student) {
-			var messageObj = {
+			 messageObj = {
 				content: input,
 				employer_name: msgObj[msgContentKeys[0]]["employer_name"],
 				employer_read: employer,
