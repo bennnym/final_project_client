@@ -57,7 +57,7 @@ function App() {
 						)} />
 						<Route
 							exact
-							path={process.env.PUBLIC_URL +'/profile/:id'}
+							path='/profile/:id'
 							render={props => <Profile {...props} />}
 						/>
 						<Route
@@ -65,7 +65,7 @@ function App() {
 							path='/auctions'
 							render={props => <Auctions {...props} />}
 						/>
-						<Route exact path={process.env.PUBLIC_URL + '/myacc' } render={props => <MyAcc {...props} />} />
+						<Route exact path='/myacc' render={props => <MyAcc {...props} />} />
 						<Route component={NoMatch} />
 					</Switch>
 				</Router>
