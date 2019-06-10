@@ -74,7 +74,7 @@ const MessageTab = props => {
 		} else if (props.student) {
 			// need to find all the messages to that student and who they are from etc
 			// end goal is to feed in the keys and object for the students emails they have got!
-			databaseRef.once("value").then(snapshot => {
+			databaseRef.on("value",snapshot => {
 				let data = snapshot.val();
 
 				let keys = _.keys(data);
@@ -120,9 +120,10 @@ const MessageTab = props => {
 			
 			if (messages[key][studentKey][msgKeys[0]]["employer_name"] === company ){
 				msgKeys.forEach( msg => {
-					console.log('got here')
+					
 					if (messages[key][studentKey][msg]["from"] === "employer") {
 						databaseRef.child(key).child(studentKey).child(msg).child("student_read").set(true)
+						console.log('changed it')
 					}
 				})
 			}
