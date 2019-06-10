@@ -68,9 +68,6 @@ const MessagePanel = props => {
 			// reverse shows the last message first
 		});
 
-		console.log(msgObj, 'msgObj')
-		console.log(msgContentKeys, 'msgContentKeys')
-
 		if (employer) {
 			var messageObj = {
 				content: input,
