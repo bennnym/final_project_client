@@ -45,8 +45,8 @@ function App() {
 			<Router>
 				<Switch>
 					<Route
-						exact
-						path='final_project_client/'
+						
+						path='/'
 						render={props => (
 							<Home
 								{...props}
@@ -55,7 +55,7 @@ function App() {
 					/>
 					<Route
 						exact
-							path='final_project_client/profile/:id'
+						path='/profile/:id'
 						render={props => (
 							<Profile
 								{...props}
@@ -64,7 +64,7 @@ function App() {
 					/>
 					<Route
 						exact
-							path='final_project_client/auctions'
+						path='/auctions'
 						render={props => (
 							<Auctions
 								{...props}
@@ -73,7 +73,7 @@ function App() {
 					/>
 						<Route
 							exact
-							path='final_project_client/myacc'
+							path='/myacc'
 							render={props => (
 								<MyAcc
 									{...props}
