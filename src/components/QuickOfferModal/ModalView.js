@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal } from 'react-bootstrap';
 
 const ModalView = (props) => {
-  const { bodyParagraph, title, bodyHeader, changeClass, ref } = props
+  const { bodyParagraph, title, bodyHeader, changeClass } = props
   return(
     <Modal
       {...props}
@@ -16,7 +16,7 @@ const ModalView = (props) => {
 
       
       <Modal.Body className={changeClass}>
-        {bodyHeader ? bodyHeader : <></>}
+        <p className="modal-subheader">{bodyHeader ? bodyHeader : <></>}</p>
         <p>{bodyParagraph}</p>
       </Modal.Body>
     </Modal>

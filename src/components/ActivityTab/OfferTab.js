@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ActivityTab.css";
 import TabCard from "./TabCard";
-import EmptyTab from './EmptyTab'
+import EmptyTab from "./EmptyTab";
 import axios from "axios";
 import links from "../../links";
 import moment from "moment";
@@ -19,8 +19,6 @@ const OfferTab = () => {
 	}, []);
 
 	const getOffersData = () => {
-
-
 		axios.get(links.root + `getbids/${localStorage.id}`).then(res => {
 			setOfferData(res.data);
 		});
@@ -67,7 +65,7 @@ const OfferTab = () => {
 
 					return (
 						<TabCard
-							key={{first_name}+(index + 1).toString()}
+							key={{ first_name } + (index + 1).toString()}
 							date={OfferDate}
 							bidAmount={formatNumber(student_info.bid.amount)}
 							profilePhoto={profile_photo}
@@ -78,7 +76,7 @@ const OfferTab = () => {
 							status={calculateStatus(student_info)}
 							salePrice={formatNumber(student_info.student_bids.amount)}
 							studentID={id}
-              bidCount={student_info.bid_count}
+							bidCount={student_info.bid_count}
 						/>
 					);
 				})

@@ -52,19 +52,19 @@ const MessagePanel = props => {
 				content: input,
 				employer_name: company,
 				employer_read: employer,
-				from: employer ? "employer" : "student",
+				from: "employer",
 				from_employer: employer,
-				from_student: student,
+				from_student: !employer,
 				student_name: studentName,
-				student_read: student,
+				student_read: !employer,
 			};
 		} else if (student) {
 			 messageObj = {
 				content: input,
 				employer_name: msgObj[msgContentKeys[0]]["employer_name"],
-				employer_read: employer,
-				from: employer ? "employer" : "student",
-				from_employer: employer,
+				employer_read: !student,
+				from: "student",
+				from_employer: !student,
 				from_student: student,
 				student_name: studentName,
 				student_read: student,
@@ -86,8 +86,10 @@ const MessagePanel = props => {
 			// reverse shows the last message first
 		});
 
-		firebaseRef.set(messageObj);
-		setInput(""); // clear the input
+		firebaseRef.once("value").then(snapshot => {
+			firebaseRef.set(messageObj);
+			setInput(""); // clear the input
+		})
 	};
 	return (
 		<React.Fragment>

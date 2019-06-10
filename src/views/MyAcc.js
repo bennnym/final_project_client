@@ -4,19 +4,18 @@ import Layout from "../components/Layout/Layout";
 import Footer from "../components/Footer/Footer";
 import ActivityTab from "../components/ActivityTab/ActivityTab";
 import MessageTab from "../components/MessageTab/MessageTab";
+import AccountTab from '../components/AccountTab/AccountTab'
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 
 const MyAcc = props => {
-	const [newMsg, setnewMsg] = useState(props.location.state ? true : false)
-	console.log('this is newMsg', newMsg)
+	const [newMsg, setnewMsg] = useState(props.location.state ? true : false);
+	const [unreadMsgs, setUnreadMsgs] = useState(0)
 
 	if (!props.employer && !props.student) {
 		return <Redirect to='/' />;
 	}
-
-
 
 	return (
 		<React.Fragment>
@@ -24,7 +23,13 @@ const MyAcc = props => {
 			<Layout>
 				<Tabs
 					className='top-tabs'
-					defaultActiveKey={props.location.state ? "messages" : props.student ? "messages" : "activity"}
+					defaultActiveKey={
+						props.location.state
+							? "messages"
+							: props.student
+							? "messages"
+							: "activity"
+					}
 					id='uncontrolled-tab-example'>
 					{props.employer ? (
 						<Tab eventKey='activity' title='Activity'>
@@ -34,9 +39,11 @@ const MyAcc = props => {
 						""
 					)}
 
-					<Tab eventKey='messages' title='Messages'>
+					<Tab eventKey='messages' title={unreadMsgs >= 1 ? `Messages (${unreadMsgs})` : 'Messages'}>
 						{props.employer ? (
 							<MessageTab
+								setUnreadMsgs={setUnreadMsgs}
+								unreadMsgs={unreadMsgs}
 								newMsg={newMsg}
 								setNewMsg={setnewMsg}
 								studentName={
@@ -44,12 +51,16 @@ const MyAcc = props => {
 								}
 								studentID={props.location.state ? props.location.state.id : ""}
 							/>
-						) : (<MessageTab
-								newMsg={newMsg}
-						/>
+						) : (
+							<MessageTab newMsg={newMsg}
+									setUnreadMsgs={setUnreadMsgs}
+									unreadMsgs={unreadMsgs}
+							 />
 						)}
 					</Tab>
-					<Tab eventKey='account' title='Account' />
+					<Tab eventKey='account' title='Account' >
+						<AccountTab/>
+					</Tab>
 				</Tabs>
 			</Layout>
 			<Footer />

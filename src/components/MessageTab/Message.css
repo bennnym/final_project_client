@@ -37,3 +37,13 @@
   text-transform: uppercase;
   font-size: 11px;
 }
+
+#false {
+	font-weight: 900;
+	border-top-right-radius: 5em;
+	border-bottom-right-radius: 5em;
+}
+
+.myacc-nav {
+	margin-top: 10px;
+}

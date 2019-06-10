@@ -12,24 +12,31 @@ const MessageTab = props => {
 	const [studentID] = useState(props.studentID);
 	const [messages, setMessages] = useState("");
 	const [keysForMsgObj, setKeysForMsgObj] = useState("");
-  const [studentKey, setStudentKey] = useState("");
+	const [studentKey, setStudentKey] = useState("");
 
 	useEffect(() => {
 		renderMessages();
 		// they have clicked here from the profile page and are looking to send a message
-  }, []);
-  
-
+	}, []);
 
 	const renderMessages = () => {
 		if (props.employer) {
 			const newRef = databaseRef.child(employerID);
 
 			if (props.newMsg) {
-				newRef
-					.child(`${studentID}-${props.studentName}`)
-					.set(moment().format());
-				props.setNewMsg(false);
+				newRef.once("value").then(snapshot => {
+					const keys = _.keys(snapshot.val()); // gets the students
+					const match = keys.filter(key => {
+						return Number(key.split("-")[0]) === studentID;
+					});
+
+					if (match.length === 0) {
+						newRef
+							.child(`${studentID}-${props.studentName}`)
+							.set(moment().format());
+						props.setNewMsg(false);
+					}
+				});
 			}
 
 			newRef.on("value", snapshot => {
@@ -43,6 +50,23 @@ const MessageTab = props => {
 
 					// student id in the format of num-name
 				}
+				const messageData = snapshot.val();
+				const studentKeys = _.keys(messageData);
+				let count = 0; // this counts how many unread msgs we have
+				studentKeys.forEach(student => {
+					let msgKeys = _.keys(messageData[student]);
+
+					let read = msgKeys.filter(msg => {
+						return messageData[student][msg]["employer_read"] === false;
+					});
+
+					if (read.length >= 1) {
+						count += 1;
+					}
+				});
+
+				props.setUnreadMsgs(count);
+
 				setMessages(snapshot.val());
 				setKeysForMsgObj(_.keys(snapshot.val()));
 				// this gets the id of the first message
@@ -50,7 +74,7 @@ const MessageTab = props => {
 		} else if (props.student) {
 			// need to find all the messages to that student and who they are from etc
 			// end goal is to feed in the keys and object for the students emails they have got!
-			databaseRef.once("value").then( snapshot => {
+			databaseRef.once("value").then(snapshot => {
 				let data = snapshot.val();
 
 				let keys = _.keys(data);
@@ -74,6 +98,48 @@ const MessageTab = props => {
 		}
 	};
 
+	const isNewMsg = msgObject => {
+		// checks if the message has been read
+
+		let keys = _.keys(msgObject);
+
+		let read = keys.filter(obj => {
+			return (
+				!msgObject[obj]["employer_read"] && msgObject[obj]["from"] === "student"
+			);
+		});
+
+		return read.length >= 1 ? "false" : "true";
+	};
+
+	const _markAsRead = e => {
+		const studentName = e.target.text;
+		databaseRef.once("value").then(snapshot => {
+			const database = snapshot.val();
+
+			const studentMsgs = database[employerID];
+
+			const studentKeys = _.keys(studentMsgs);
+
+			const studentKey = studentKeys.filter(key => {
+				return key.split("-")[1] === studentName;
+			});
+
+			const individualMsgKeys = _.keys(database[employerID][studentKey]);
+
+			individualMsgKeys.map(key => {
+				if (database[employerID][studentKey[0]][key]["from"] === "student") {
+					databaseRef
+						.child(employerID)
+						.child(studentKey[0])
+						.child(key)
+						.child("employer_read")
+						.set(true);
+				}
+			});
+		});
+	};
+
 	return (
 		<Tab.Container
 			id='left-tabs-example'
@@ -84,21 +150,27 @@ const MessageTab = props => {
 						{keysForMsgObj.length >= 1 && messages ? (
 							keysForMsgObj.map((key, index) => {
 								if (props.employer) {
+									let style_id = isNewMsg(messages[key]);
+
 									let name = key.split("-")[1]; // gets full name
 									let id = key.split("-")[0];
 									return (
-										<Nav.Item key={index}>
-											<Nav.Link eventKey={studentID ? id : index}>
+										<Nav.Item className='myacc-nav' id={style_id} key={index}>
+											<Nav.Link
+												onClick={_markAsRead}
+												value={key}
+												eventKey={studentID ? id : index}>
 												{name}
 											</Nav.Link>
 										</Nav.Item>
 									);
 								} else if (props.student) {
 									let keys = _.keys(messages[key][studentKey]);
-									let name =
-                    messages[key][studentKey][keys[0]] ? messages[key][studentKey][keys[0]]["employer_name"] : 'Incoming Message'
+									let name = messages[key][studentKey][keys[0]]
+										? messages[key][studentKey][keys[0]]["employer_name"]
+										: "Incoming Message";
 									return (
-										<Nav.Item key={index}>
+										<Nav.Item className='myacc-nav' key={index}>
 											<Nav.Link eventKey={index}>{name}</Nav.Link>
 										</Nav.Item>
 									);
