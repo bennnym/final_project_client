@@ -47,7 +47,7 @@ const HomeCard = ( props ) => {
       <Card.Img id="card-image" variant="top" src={profile_photo} />
       </Link>
 
-      <Card.Body>
+      <Card.Body className="home-card-body">
         <Card.Title>{first_name} {last_name}</Card.Title>
         <Card.Text> {university}</Card.Text>
         <Card.Text> <strong>${formatNumber( bids.length > 0 ? bids[0].amount : reserve_price )}</strong></Card.Text>

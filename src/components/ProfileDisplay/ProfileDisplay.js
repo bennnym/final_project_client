@@ -8,7 +8,8 @@ import "./ProfileDisplay.css";
 import links from "../../links";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import moment from 'moment'
 
 const ProfileDisplay = props => {
 	const [modalShow, setModalShow] = useState(false);
@@ -26,6 +27,9 @@ const ProfileDisplay = props => {
 		university,
 		watchlists,
 	} = props.data;
+
+	if ( moment().utc() > moment(auction_duration) ){ return (<Redirect to="/auctions"/> )}
+	
 
 	const formatNumber = num => {
 		if (num) {
@@ -185,7 +189,7 @@ const ProfileDisplay = props => {
 						<></>
 					)}
 					<div className='price-display buttons message-button'>
-						{first_name ? (
+						{first_name && props.employer ? (
 							<Link
 								to={{
 									pathname: `/myacc`,

@@ -19,6 +19,7 @@
 	padding-left: 20px;
 	background-color: burlywood;
 	border-radius: 1rem;
+	font-weight: 700;
 }
 
 .employer {
@@ -29,6 +30,7 @@
 	padding-left: 20px;
 	background-color: cadetblue;
 	border-radius: 1rem;
+		font-weight: 700;
 }
 
 .student h6, .employer h6 {

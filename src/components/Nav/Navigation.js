@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	Navbar,
 	NavDropdown,
@@ -13,12 +13,15 @@ import logo from "../../assets/img/logo.png";
 import LoginModal from "../LoginModal/LoginModal";
 import LoginForm from "../LoginModal/LoginForm";
 import SignupForm from "../LoginModal/SignupForm";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from 'axios';
+import links from '../../links';
 
 const Navigation = props => {
 	const [SignInModalShow, setSignInModalShow] = useState(false);
 	const [SignUpModalShow, setSignUpModalShow] = useState(false);
+	const [randomID, setRandomID] = useState(false)
 
 	let SignInModalClose = () => setSignInModalShow(false);
 	let SignUpModalClose = () => setSignUpModalShow(false);
@@ -38,6 +41,18 @@ const Navigation = props => {
 		localStorage.setItem("studentID", "")
 	};
 
+	useEffect(() => {
+		_luckyProfile()
+	},[])
+
+	const _luckyProfile = () => {
+		axios.get(links.root + 'students').then((res) => {
+			let length = res.data.length 
+			let random = Math.floor(Math.random() * (length - 1))
+			setRandomID(  res.data[random].id )
+		})
+	}
+
 	return (
 		<Navbar bg='dark' variant='dark' expand='lg'>
 			<Link to='/' className='navbar-brand'>
@@ -49,13 +64,13 @@ const Navigation = props => {
 					<Link className='nav-link' to='/auctions'>
 						<FontAwesomeIcon icon='user-graduate' /> Auctions
 					</Link>
-					<Nav.Link href=''>
-						<FontAwesomeIcon icon='building' /> Employers
+					<Nav.Link href={`/profile/${randomID}`}>
+						<FontAwesomeIcon icon='dice' /> Feeling Lucky
 					</Nav.Link>
 
 					{props.employer || props.student ? (
 						<NavDropdown title='My Account' id='basic-nav-dropdown'>
-								<Link className='dropdown-item' to='/myacc'>
+								<Link to="/myacc" className='dropdown-item' >
 									My GradBay
 							</Link>
 							

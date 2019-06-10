@@ -9,6 +9,12 @@
   border-left: 1px solid rgba(0, 0, 0, .125) !important;
 }   
 
+.home-card-body{
+  display: flex;
+  align-items: unset;
+  flex-direction: column;
+}
+
 .card-group a {
    color: inherit;
    text-decoration: inherit;
@@ -41,9 +47,6 @@ div.card-group {
 }
 
 @media only screen and (max-width: 700px) {
-  #card-properties {
-    height: 68vh;
-  }
 
   #card-image {
     height: 173px;
