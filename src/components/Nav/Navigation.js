@@ -64,9 +64,9 @@ const Navigation = props => {
 					<Link className='nav-link' to='/auctions'>
 						<FontAwesomeIcon icon='user-graduate' /> Auctions
 					</Link>
-					<Nav.Link href={`/profile/${randomID}`}>
+					<Link className='nav-link' to={`/profile/${randomID}`}>
 						<FontAwesomeIcon icon='dice' /> Feeling Lucky
-					</Nav.Link>
+						</Link>
 
 					{props.employer || props.student ? (
 						<NavDropdown title='My Account' id='basic-nav-dropdown'>
