@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bennnym.github.io/final_project_client",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.18",
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
@@ -11,6 +12,7 @@
     "faker": "^4.1.0",
     "firebase": "^6.1.1",
     "formik": "^1.5.7",
+    "gh-pages": "^2.0.1",
     "i": "^0.3.6",
     "moment": "^2.24.0",
     "npm": "^6.9.0",
@@ -33,7 +35,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
