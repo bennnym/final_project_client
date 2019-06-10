@@ -79,7 +79,7 @@ function App() {
 								/>
 							)}
 						/>
-					<Route component={NoMatch} />
+					<Route component={Home} />
 				</Switch>
 			</Router>
 		</Provider>
