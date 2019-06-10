@@ -9,7 +9,7 @@ import EmptyInbox from "./EmptyInbox";
 
 const MessageTab = props => {
 	const [employerID] = useState(localStorage.id);
-  const [studentID] = useState(props.studentID);
+	const [studentID] = useState(props.studentID);
 	const [messages, setMessages] = useState("");
 	const [keysForMsgObj, setKeysForMsgObj] = useState("");
 	const [studentKey, setStudentKey] = useState("");
@@ -17,9 +17,9 @@ const MessageTab = props => {
 	useEffect(() => {
 		renderMessages();
 		// they have clicked here from the profile page and are looking to send a message
-  }, []);
-  
-  console.log('here it is in the tab', props.newMsg)
+	}, []);
+
+	console.log("here it is in the tab", props.newMsg);
 
 	const renderMessages = () => {
 		if (props.employer) {
@@ -28,9 +28,8 @@ const MessageTab = props => {
 			if (props.newMsg) {
 				newRef
 					.child(`${studentID}-${props.studentName}`)
-          .set(moment().format());
-          props.setNewMsg(false)
-          console.log('should change it here')
+					.set(moment().format());
+				props.setNewMsg(false);
 			}
 
 			newRef.on("value", snapshot => {
@@ -38,10 +37,9 @@ const MessageTab = props => {
 					// there are no messages so we probably need to create one with the new student we are attempting to mesage
 					newRef
 						.child(`${studentID}-${props.studentName}`)
-            .set(moment().format());
+						.set(moment().format());
 
-          props.setNewMsg(false)
-
+					props.setNewMsg(false);
 
 					// student id in the format of num-name
 				}
@@ -77,7 +75,9 @@ const MessageTab = props => {
 	};
 
 	return (
-		<Tab.Container id='left-tabs-example' defaultActiveKey={studentID ? studentID : 0}>
+		<Tab.Container
+			id='left-tabs-example'
+			defaultActiveKey={studentID ? studentID : 0}>
 			<Row>
 				<Col sm={2}>
 					<Nav variant='pills' className='flex-column side-tabs'>
@@ -88,11 +88,12 @@ const MessageTab = props => {
 									let id = key.split("-")[0];
 									return (
 										<Nav.Item key={index}>
-											<Nav.Link eventKey={studentID ? id : index}>{name}</Nav.Link>
+											<Nav.Link eventKey={studentID ? id : index}>
+												{name}
+											</Nav.Link>
 										</Nav.Item>
 									);
 								} else if (props.student) {
-      
 									let keys = _.keys(messages[key][studentKey]);
 									let name =
 										messages[key][studentKey][keys[0]]["employer_name"];
@@ -117,7 +118,7 @@ const MessageTab = props => {
 									let name = key.split("-")[1];
 									let id = key.split("-")[0];
 									return (
-                    <Tab.Pane key={index} eventKey={studentID ? id : index}>
+										<Tab.Pane key={index} eventKey={studentID ? id : index}>
 											<MessagePanel
 												messageContent={messages[key]}
 												employerID={employerID}

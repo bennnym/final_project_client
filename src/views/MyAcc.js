@@ -45,7 +45,7 @@ const MyAcc = props => {
 								studentID={props.location.state ? props.location.state.id : ""}
 							/>
 						) : (<MessageTab
-							newMessage={props.location.state ? true : false}
+								newMsg={newMsg}
 						/>
 						)}
 					</Tab>
