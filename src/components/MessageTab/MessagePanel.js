@@ -15,9 +15,10 @@ const MessagePanel = props => {
 	const [company, setCompany] = useState("");
 	const [msgObj, setmsgObj] = useState("");
 
-	const { messageContent, student, employer, studentName } = props;
+	const { messageContent, student, employer, studentName, messageContentKeys } = props;
 
 	useEffect(() => {
+		console.log('useEffect')
 		getMsgContent();
 		getEmployerInfo();
 	}, []);
@@ -26,6 +27,9 @@ const MessagePanel = props => {
 		setMsgContentKeys(_.keys(messageContent).reverse());
 		setmsgObj(messageContent);
 	};
+
+	console.log(messageContent, 'from the standard render, messageContent')
+	console.log(msgContentKeys	, 'from the standard render, messageContent')
 
 	const getEmployerInfo = () => {
 		if (student) {
@@ -47,29 +51,7 @@ const MessagePanel = props => {
 	};
 
 	const _handleClick = () => {
-		if (employer) {
-			var messageObj = {
-				content: input,
-				employer_name: company,
-				employer_read: employer,
-				from: "employer",
-				from_employer: employer,
-				from_student: !employer,
-				student_name: studentName,
-				student_read: !employer,
-			};
-		} else if (student) {
-			 messageObj = {
-				content: input,
-				employer_name: msgObj[msgContentKeys[0]]["employer_name"],
-				employer_read: !student,
-				from: "student",
-				from_employer: !student,
-				from_student: student,
-				student_name: studentName,
-				student_read: student,
-			};
-		}
+
 
 		const firebaseRef = databaseRef
 			.child(props.employerID)
@@ -85,6 +67,33 @@ const MessagePanel = props => {
 			setMsgContentKeys(_.keys(snapshot.val()).reverse());
 			// reverse shows the last message first
 		});
+
+		console.log(msgObj, 'msgObj')
+		console.log(msgContentKeys, 'msgContentKeys')
+
+		if (employer) {
+			var messageObj = {
+				content: input,
+				employer_name: company,
+				employer_read: employer,
+				from: "employer",
+				from_employer: employer,
+				from_student: !employer,
+				student_name: studentName,
+				student_read: !employer,
+			};
+		} else if (student) {
+			messageObj = {
+				content: input,
+				employer_name: msgContentKeys.length >= 1 ? messageContent[msgContentKeys[0]]["employer_name"] : messageContent[messageContentKeys[0]]["employer_name"],
+				employer_read: !student,
+				from: "student",
+				from_employer: !student,
+				from_student: student,
+				student_name: studentName,
+				student_read: student,
+			};
+		}
 
 		firebaseRef.once("value").then(snapshot => {
 			firebaseRef.set(messageObj);

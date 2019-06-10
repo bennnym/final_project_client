@@ -75,6 +75,7 @@ const MessageTab = props => {
 			// need to find all the messages to that student and who they are from etc
 			// end goal is to feed in the keys and object for the students emails they have got!
 			databaseRef.on("value",snapshot => {
+				console.log('student updated')
 				let data = snapshot.val();
 
 				let keys = _.keys(data);
@@ -187,7 +188,6 @@ const MessageTab = props => {
 										</Nav.Item>
 									);
 								} else if (props.student) {
-									console.log(messages);
 									let style_id = isNewMsg(
 										messages[key][studentKey],
 										"employer",
@@ -237,6 +237,7 @@ const MessageTab = props => {
 										<Tab.Pane key={index} eventKey={index}>
 											<MessagePanel
 												messageContent={messages[key][studentKey]}
+												messageContentKeys={_.keys(messages[key][studentKey])}
 												employerID={key}
 												studentID={localStorage.studentID}
 												studentName={studentKey.split("-")[1]} // these are all the messages between that student and employer
