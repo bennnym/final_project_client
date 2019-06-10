@@ -18,7 +18,6 @@ const MessagePanel = props => {
 	const { messageContent, student, employer, studentName, messageContentKeys } = props;
 
 	useEffect(() => {
-		console.log('useEffect')
 		getMsgContent();
 		getEmployerInfo();
 	}, []);
@@ -27,9 +26,6 @@ const MessagePanel = props => {
 		setMsgContentKeys(_.keys(messageContent).reverse());
 		setmsgObj(messageContent);
 	};
-
-	console.log(messageContent, 'from the standard render, messageContent')
-	console.log(msgContentKeys	, 'from the standard render, messageContent')
 
 	const getEmployerInfo = () => {
 		if (student) {

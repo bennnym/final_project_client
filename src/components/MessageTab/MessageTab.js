@@ -75,7 +75,6 @@ const MessageTab = props => {
 			// need to find all the messages to that student and who they are from etc
 			// end goal is to feed in the keys and object for the students emails they have got!
 			databaseRef.on("value",snapshot => {
-				console.log('student updated')
 				let data = snapshot.val();
 
 				let keys = _.keys(data);
@@ -92,6 +91,10 @@ const MessageTab = props => {
 						}
 					});
 				});
+
+				// calculate how many messages are unread
+
+				console.log(result, 'results')
 
 				setMessages(result);
 				setKeysForMsgObj(_.keys(result));
