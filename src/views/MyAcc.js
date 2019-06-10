@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navigation from "../components/Nav/Navigation";
 import Layout from "../components/Layout/Layout";
 import Footer from "../components/Footer/Footer";
@@ -9,9 +9,13 @@ import { Redirect } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 
 const MyAcc = props => {
+	const [newMsg, setnewMsg] = useState(props.location.state ? true : false)
+
 	if (!props.employer && !props.student) {
 		return <Redirect to='/' />;
 	}
+
+
 
 	return (
 		<React.Fragment>
@@ -19,7 +23,7 @@ const MyAcc = props => {
 			<Layout>
 				<Tabs
 					className='top-tabs'
-					defaultActiveKey={props.location.state ? "messages" : "activity"}
+					defaultActiveKey={props.location.state ? "messages" : props.student ? "messages" : "activity"}
 					id='uncontrolled-tab-example'>
 					{props.employer ? (
 						<Tab eventKey='activity' title='Activity'>
@@ -32,13 +36,16 @@ const MyAcc = props => {
 					<Tab eventKey='messages' title='Messages'>
 						{props.employer ? (
 							<MessageTab
-								newMessage={props.location.state ? true : false}
+								newMessage={newMsg}
+								setNewMsg={setnewMsg}
 								studentName={
 									props.location.state ? props.location.state.name : ""
 								}
 								studentID={props.location.state ? props.location.state.id : ""}
 							/>
-						) : ( ''
+						) : (<MessageTab
+							newMessage={props.location.state ? true : false}
+						/>
 						)}
 					</Tab>
 					<Tab eventKey='account' title='Account' />

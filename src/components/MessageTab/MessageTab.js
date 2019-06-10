@@ -5,102 +5,99 @@ import { databaseRef } from "../../config/firebase";
 import moment from "moment";
 import _ from "underscore";
 import { connect } from "react-redux";
+import EmptyInbox from "./EmptyInbox";
 
 const MessageTab = props => {
 	const [employerID] = useState(localStorage.id);
-	const [studentID] = useState(props.studentID);
+  const [studentID] = useState(props.studentID);
 	const [messages, setMessages] = useState("");
 	const [keysForMsgObj, setKeysForMsgObj] = useState("");
+	const [studentKey, setStudentKey] = useState("");
 
 	useEffect(() => {
 		renderMessages();
 		// they have clicked here from the profile page and are looking to send a message
-	}, []);
+  }, []);
+  
 
 	const renderMessages = () => {
-     databaseRef.once("value").then(snapshot => {
-       console.log(snapshot.val(), 'this is the high level snapshot')
-      
-       let data = snapshot.val()
+		if (props.employer) {
+			const newRef = databaseRef.child(employerID);
 
-       let keys = _.keys(data)
-
-       let result = {}
-
-       keys.map(key => {
-         const temp1Keys_Keys = _.keys(data[key])
-
-         temp1Keys_Keys.map(k => {
-           if (k.split('-')[0] == 33) {
-             result[key] = { [k]: data[key][k] }
-           }
-         })
-       })
-
-       console.log(result);
-
-     }) 
-
-    if ( props.employer ){
-		const newRef = databaseRef.child(employerID);
-
-		if (props.newMessage) {
-			newRef.child(`${studentID}-${props.studentName}`).set(moment().format());
-		}
-
-		newRef.on("value", snapshot => {
-			if (snapshot.val() === null) {
-				// there are no messages so we probably need to create one with the new student we are attempting to mesage
+			if (props.newMsg) {
+        console.log('CREATING OR DELETING!')
 				newRef
 					.child(`${studentID}-${props.studentName}`)
-					.set(moment().format());
-
-				renderMessages();
-				// student id in the format of num-name
+          .set(moment().format());
+          props.setNewMsg(false)
 			}
-			setMessages(snapshot.val());
-			setKeysForMsgObj(_.keys(snapshot.val()));
-			// this gets the id of the first message
-    });
-  } else if ( props.student ) {
-    // need to find all the messages to that student and who they are from etc
 
-    // end goal is to feed in the keys and object for the students emails they have got!
-      databaseRef.once("value").then(snapshot => {
-        let data = snapshot.val()
+			newRef.on("value", snapshot => {
+				if (snapshot.val() === null) {
+					// there are no messages so we probably need to create one with the new student we are attempting to mesage
+					newRef
+						.child(`${studentID}-${props.studentName}`)
+						.set(moment().format());
 
-        let keys = _.keys(snapshot.val())
+					// student id in the format of num-name
+				}
+				setMessages(snapshot.val());
+				setKeysForMsgObj(_.keys(snapshot.val()));
+				// this gets the id of the first message
+			});
+		} else if (props.student) {
+			// need to find all the messages to that student and who they are from etc
+			// end goal is to feed in the keys and object for the students emails they have got!
+			databaseRef.on("value", snapshot => {
+				let data = snapshot.val();
 
-        keys.map(key => {
-          const student_keys = _.keys(data[key])
+				let keys = _.keys(data);
 
-          var match = student_keys.filter( i => {
-            return (i.split('-')[0] === localStorage.studentID)
-          })
-            console.log(match)
-        })
-      })
-  }
+				let result = {};
+
+				keys.map(key => {
+					const temp1Keys_Keys = _.keys(data[key]);
+
+					temp1Keys_Keys.map(k => {
+						if (Number(k.split("-")[0]) === Number(localStorage.studentID)) {
+							setStudentKey(k);
+							return (result[key] = { [k]: data[key][k] });
+						}
+					});
+				});
+
+				setMessages(result);
+				setKeysForMsgObj(_.keys(result));
+			});
+		}
 	};
 
 	return (
-		<Tab.Container
-			id='left-tabs-example'
-			defaultActiveKey={studentID ? studentID : 0}>
+		<Tab.Container id='left-tabs-example' defaultActiveKey={studentID ? studentID : 0}>
 			<Row>
 				<Col sm={2}>
 					<Nav variant='pills' className='flex-column side-tabs'>
-						{keysForMsgObj ? (
+						{keysForMsgObj.length >= 1 ? (
 							keysForMsgObj.map((key, index) => {
-								let name = key.split("-")[1]; // gets full name
-								let id = key.split("-")[0];
-								return (
-									<Nav.Item key={index}>
-										<Nav.Link eventKey={index === 0 ? index : id}>
-											{name}
-										</Nav.Link>
-									</Nav.Item>
-								);
+								if (props.employer) {
+									let name = key.split("-")[1]; // gets full name
+									let id = key.split("-")[0];
+									return (
+										<Nav.Item key={index}>
+											<Nav.Link eventKey={studentID ? id : index}>{name}</Nav.Link>
+										</Nav.Item>
+									);
+								} else if (props.student) {
+      
+									let keys = _.keys(messages[key][studentKey]);
+									let name =
+										messages[key][studentKey][keys[0]]["employer_name"];
+									return (
+										<Nav.Item key={index}>
+											<Nav.Link eventKey={index}>{name}</Nav.Link>
+										</Nav.Item>
+									);
+								}
 							})
 						) : (
 							<></>
@@ -110,23 +107,37 @@ const MessageTab = props => {
 
 				<Col sm={10}>
 					<Tab.Content>
-						{keysForMsgObj ? (
+						{keysForMsgObj.length >= 1 ? (
 							keysForMsgObj.map((key, index) => {
-								let name = key.split("-")[1];
-								let id = key.split("-")[0];
-								return (
-									<Tab.Pane key={index} eventKey={id}>
-										<MessagePanel
-											messageContent={messages[key]}
-											employerID={employerID}
-											studentID={id}
-											studentName={name} // these are all the messages between that student and employer
-										/>
-									</Tab.Pane>
-								);
+								if (props.employer) {
+									let name = key.split("-")[1];
+									let id = key.split("-")[0];
+									return (
+                    <Tab.Pane key={index} eventKey={studentID ? id : index}>
+											<MessagePanel
+												messageContent={messages[key]}
+												employerID={employerID}
+												studentID={id}
+												studentName={name} // these are all the messages between that student and employer
+											/>
+										</Tab.Pane>
+									);
+								} else if (props.student) {
+									return (
+										<Tab.Pane key={index} eventKey={index}>
+											<MessagePanel
+												messageContent={messages[key][studentKey]}
+												employerID={key}
+												studentID={localStorage.studentID}
+												studentName={studentKey.split("-")[1]} // these are all the messages between that student and employer
+												studentKey={studentKey}
+											/>
+										</Tab.Pane>
+									);
+								}
 							})
 						) : (
-							<></>
+							<EmptyInbox />
 						)}
 					</Tab.Content>
 				</Col>

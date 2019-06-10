@@ -55,15 +55,10 @@ const Navigation = props => {
 
 					{props.employer || props.student ? (
 						<NavDropdown title='My Account' id='basic-nav-dropdown'>
-							{props.employer ? (
 								<Link className='dropdown-item' to='/myacc'>
 									My GradBay
 							</Link>
-							) : (
-								<NavDropdown.Item href='#action/3.1'>
-									Student My GradBay
-								</NavDropdown.Item>
-							)}
+							
 
 							{/* <NavDropdown.Item href='#action/3.2'>
 								Another action

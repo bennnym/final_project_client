@@ -13,6 +13,9 @@ const MessagePanel = props => {
 	const [msgContentKeys, setMsgContentKeys] = useState("");
 	const [input, setInput] = useState("");
 	const [company, setCompany] = useState("");
+	const [msgObj, setmsgObj] = useState("");
+
+	const { messageContent, student, employer, studentName } = props;
 
 	useEffect(() => {
 		getMsgContent();
@@ -20,10 +23,14 @@ const MessagePanel = props => {
 	}, []);
 
 	const getMsgContent = () => {
-		setMsgContentKeys(_.keys(props.messageContent).reverse());
+		setMsgContentKeys(_.keys(messageContent).reverse());
+		setmsgObj(messageContent);
 	};
 
 	const getEmployerInfo = () => {
+		if (student) {
+			return;
+		}
 		axios.get(links.root + `employer/${props.employerID}`).then(res => {
 			setCompany(res.data.company);
 		});
@@ -40,16 +47,29 @@ const MessagePanel = props => {
 	};
 
 	const _handleClick = () => {
-		const messageObj = {
-			content: input,
-			employer_name: company,
-			employer_read: props.employer,
-			from: props.employer ? "employer" : "student",
-			from_employer: props.employer,
-			from_student: props.student,
-			student_name: props.studentName,
-			student_read: props.student,
-		};
+		if (employer) {
+			var messageObj = {
+				content: input,
+				employer_name: company,
+				employer_read: employer,
+				from: employer ? "employer" : "student",
+				from_employer: employer,
+				from_student: student,
+				student_name: studentName,
+				student_read: student,
+			};
+		} else if (student) {
+			var messageObj = {
+				content: input,
+				employer_name: msgObj[msgContentKeys[0]]["employer_name"],
+				employer_read: employer,
+				from: employer ? "employer" : "student",
+				from_employer: employer,
+				from_student: student,
+				student_name: studentName,
+				student_read: student,
+			};
+		}
 
 		const firebaseRef = databaseRef
 			.child(props.employerID)
@@ -61,31 +81,33 @@ const MessagePanel = props => {
 			.child(`${props.studentID}-${props.studentName}`);
 
 		otherRef.on("value", snapshot => {
-			setMsgContentKeys(_.keys(snapshot.val()).reverse()); // reverse shows the last message first
+			setmsgObj(snapshot.val());
+			setMsgContentKeys(_.keys(snapshot.val()).reverse());
+			// reverse shows the last message first
 		});
 
 		firebaseRef.set(messageObj);
 		setInput(""); // clear the input
 	};
-
 	return (
 		<React.Fragment>
 			<div className='message-content'>
-				{msgContentKeys
+				{msgContentKeys.length >= 1
 					? msgContentKeys.map((key, index) => {
-							return (
-								<SingleMessage
-									key={index}
-									identifier={props.messageContent[key]["from"]}
-									sender={
-										props.messageContent[key]["from_employer"]
-											? props.messageContent[key]["employer_name"]
-											: props.messageContent[key]["student_name"]
-									} // check who sent msg
-									content={props.messageContent[key]["content"]}
-								/>
-							);
-					  })
+								return (
+									<SingleMessage
+										key={index}
+										identifier={msgObj[key]["from"]}
+										sender={
+											msgObj[key]["from_employer"]
+												? msgObj[key]["employer_name"]
+												: msgObj[key]["student_name"]
+										} // check who sent msg
+										content={msgObj[key]["content"]}
+									/>
+								);
+							}
+					)
 					: ""}
 			</div>
 			<InputGroup className='message-input'>
