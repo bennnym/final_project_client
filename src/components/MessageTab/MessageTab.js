@@ -33,7 +33,7 @@ const MessageTab = props => {
 			}
 
 			newRef.on("value", snapshot => {
-				if (snapshot.val() === null) {
+				if (snapshot.val() === null && studentID ) {
 					// there are no messages so we probably need to create one with the new student we are attempting to mesage
 					newRef
 						.child(`${studentID}-${props.studentName}`)
