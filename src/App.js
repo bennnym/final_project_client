@@ -54,7 +54,7 @@ function App() {
 						)}
 					/>
 					<Route
-						
+						exact
 						path='/profile/:id'
 						render={props => (
 							<Profile
@@ -63,7 +63,7 @@ function App() {
 						)}
 					/>
 					<Route
-						
+						exact
 						path='/auctions'
 						render={props => (
 							<Auctions
@@ -72,7 +72,7 @@ function App() {
 						)}
 					/>
 						<Route
-							
+							exact
 							path='/myacc'
 							render={props => (
 								<MyAcc
