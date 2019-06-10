@@ -98,19 +98,37 @@ const MessageTab = props => {
 		}
 	};
 
-	const isNewMsg = msgObject => {
+	const isNewMsg = (msgObject, check, reader) => {
 		// checks if the message has been read
 
 		let keys = _.keys(msgObject);
 
 		let read = keys.filter(obj => {
-			return (
-				!msgObject[obj]["employer_read"] && msgObject[obj]["from"] === "student"
-			);
+			return !msgObject[obj][reader] && msgObject[obj]["from"] === check;
 		});
 
 		return read.length >= 1 ? "false" : "true";
 	};
+
+	const _markStudentRead = (e) => {
+		const company = e.target.text
+		databaseRef.once("value").then(snapshot => {
+		const companyKeys = _.keys(messages)
+
+		companyKeys.forEach( key => {
+			let msgKeys = _.keys(messages[key][studentKey])
+			
+			if (messages[key][studentKey][msgKeys[0]]["employer_name"] === company ){
+				msgKeys.forEach( msg => {
+					console.log('got here')
+					if (messages[key][studentKey][msg]["from"] === "employer") {
+						databaseRef.child(key).child(studentKey).child(msg).child("student_read").set(true)
+					}
+				})
+			}
+		})
+		})
+	}
 
 	const _markAsRead = e => {
 		const studentName = e.target.text;
@@ -150,8 +168,11 @@ const MessageTab = props => {
 						{keysForMsgObj.length >= 1 && messages ? (
 							keysForMsgObj.map((key, index) => {
 								if (props.employer) {
-									let style_id = isNewMsg(messages[key]);
-
+									let style_id = isNewMsg(
+										messages[key],
+										"student",
+										"employer_read"
+									);
 									let name = key.split("-")[1]; // gets full name
 									let id = key.split("-")[0];
 									return (
@@ -165,12 +186,23 @@ const MessageTab = props => {
 										</Nav.Item>
 									);
 								} else if (props.student) {
+									console.log(messages);
+									let style_id = isNewMsg(
+										messages[key][studentKey],
+										"employer",
+										"student_read"
+									);
 									let keys = _.keys(messages[key][studentKey]);
 									let name = messages[key][studentKey][keys[0]]
 										? messages[key][studentKey][keys[0]]["employer_name"]
 										: "Incoming Message";
 									return (
-										<Nav.Item className='myacc-nav' key={index}>
+										<Nav.Item
+											id={style_id}
+											onClick={_markStudentRead}
+											className='myacc-nav'
+											key={index}
+											value={key}>
 											<Nav.Link eventKey={index}>{name}</Nav.Link>
 										</Nav.Item>
 									);
