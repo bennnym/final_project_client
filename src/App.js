@@ -45,7 +45,7 @@ function App() {
 			<Router>
 				<Switch>
 					<Route
-						
+						exact
 						path='/'
 						render={props => (
 							<Home
