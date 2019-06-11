@@ -21,8 +21,7 @@ const schema = yup.object({
 	gpa: yup
 		.number()
 		.required()
-		.positive()
-		.integer(),
+		.positive(),
 	reserve: yup
 		.number()
 		.required()
