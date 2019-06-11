@@ -100,7 +100,6 @@ const Navigation = props => {
 				let studentName = _.keys(result[employerKeys[0]])
 				studentName = studentName[0]
 				let count = 0;
-				console.log(studentName)
 				employerKeys.forEach(key => {
 					let msgKeys = _.keys(result[key][studentName])
 
@@ -133,7 +132,6 @@ const Navigation = props => {
 			let length = res.data.length;
 			let random = Math.floor(Math.random() * (length - 1));
 			setRandomID(res.data[random].id);
-			console.log("set it to ", res.data[random].id);
 		});
 	};
 
@@ -201,9 +199,10 @@ const Navigation = props => {
 						form={<SignupForm />}
 					/>
 				</Nav>
+				{ props.employer || props.student ? 
 				<Link to='/myacc' className='nav-link'>
 					<FontAwesomeIcon id={newMsg} className='fa-2x' icon='envelope' />
-				</Link>
+				</Link> : '' }
 			</Navbar.Collapse>
 		</Navbar>
 	);

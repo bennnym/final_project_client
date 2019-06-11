@@ -1,0 +1,42 @@
+.account-form {
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.student-account-form {
+	display: flex;
+  align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.email-student {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.error-student-form {
+  color: red;
+  font-weight: 700;
+  text-align: center
+}
+
+.success-student-form {
+  color: green;
+  font-weight: 700;
+  text-align: center;
+}
+
+.error-employer-form {
+  color: red;
+  font-weight: 700;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.success-employer-form {
+  color: green;
+  font-weight: 700;
+  text-align: left;
+  margin-top: 10px;
+}

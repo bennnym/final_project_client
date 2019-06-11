@@ -105,8 +105,7 @@ const MessagePanel = props => {
 			<div className='message-content'>
 				{msgContentKeys.length >= 1
 					? msgContentKeys.map((key, index) => {
-						console.log(msgContentKeys)
-						console.log(msgObj)
+
 							return (
 								<SingleMessage
 									key={index}
