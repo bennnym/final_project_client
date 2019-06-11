@@ -94,7 +94,26 @@ const MessageTab = props => {
 
 				// calculate how many messages are unread
 
-				console.log(result, 'results')
+				const employerKeys = _.keys(data)
+
+				let studentName = _.keys(data[employerKeys[0]])
+				studentName = studentName[0]
+				let count = 0;
+
+				employerKeys.forEach(key => {
+					let msgKeys = _.keys(data[key][studentName])
+
+					let unread = msgKeys.filter(k => {
+
+						return data[key][studentName][k]["student_read"] === false
+
+					})
+
+					if (unread.length >= 1) { count += 1 }
+
+				})
+
+				props.setUnreadMsgs(count);
 
 				setMessages(result);
 				setKeysForMsgObj(_.keys(result));
@@ -127,7 +146,6 @@ const MessageTab = props => {
 					
 					if (messages[key][studentKey][msg]["from"] === "employer") {
 						databaseRef.child(key).child(studentKey).child(msg).child("student_read").set(true)
-						console.log('changed it')
 					}
 				})
 			}

@@ -51,9 +51,9 @@ function App() {
 	return (
 		<React.Fragment>
 			<Provider store={store}>
-				<Router >
+				<Router basename={process.env.PUBLIC_URL}>
 					<Switch>
-						<Route exact path={process.env.PUBLIC_URL + '/'} component={Home} />
+						<Route exact path='/' component={Home} />
 						)} />
 						<Route
 							exact
