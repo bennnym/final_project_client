@@ -237,7 +237,7 @@ const MessageTab = props => {
 				</Col>
 
 				<Col sm={10}>
-					<Tab.Content>
+					<Tab.Content >
 						{keysForMsgObj.length >= 1 && messages ? (
 							keysForMsgObj.map((key, index) => {
 								if (props.employer) {
@@ -250,6 +250,7 @@ const MessageTab = props => {
 												employerID={employerID}
 												studentID={id}
 												studentName={name} // these are all the messages between that student and employer
+												
 											/>
 										</Tab.Pane>
 									);
@@ -263,6 +264,7 @@ const MessageTab = props => {
 												studentID={localStorage.studentID}
 												studentName={studentKey.split("-")[1]} // these are all the messages between that student and employer
 												studentKey={studentKey}
+												
 											/>
 										</Tab.Pane>
 									);

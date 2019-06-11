@@ -15,7 +15,13 @@ const MessagePanel = props => {
 	const [company, setCompany] = useState("");
 	const [msgObj, setmsgObj] = useState("");
 
-	const { messageContent, student, employer, studentName, messageContentKeys } = props;
+	const {
+		messageContent,
+		student,
+		employer,
+		studentName,
+		messageContentKeys,
+	} = props;
 
 	useEffect(() => {
 		getMsgContent();
@@ -47,8 +53,6 @@ const MessagePanel = props => {
 	};
 
 	const _handleClick = () => {
-
-
 		const firebaseRef = databaseRef
 			.child(props.employerID)
 			.child(`${props.studentID}-${props.studentName}`)
@@ -78,7 +82,10 @@ const MessagePanel = props => {
 		} else if (student) {
 			messageObj = {
 				content: input,
-				employer_name: msgContentKeys.length >= 1 ? messageContent[msgContentKeys[0]]["employer_name"] : messageContent[messageContentKeys[0]]["employer_name"],
+				employer_name:
+					msgContentKeys.length >= 1
+						? messageContent[msgContentKeys[0]]["employer_name"]
+						: messageContent[messageContentKeys[0]]["employer_name"],
 				employer_read: !student,
 				from: "student",
 				from_employer: !student,
@@ -91,27 +98,26 @@ const MessagePanel = props => {
 		firebaseRef.once("value").then(snapshot => {
 			firebaseRef.set(messageObj);
 			setInput(""); // clear the input
-		})
+		});
 	};
 	return (
 		<React.Fragment>
 			<div className='message-content'>
 				{msgContentKeys.length >= 1
 					? msgContentKeys.map((key, index) => {
-								return (
-									<SingleMessage
-										key={index}
-										identifier={msgObj[key]["from"]}
-										sender={
-											msgObj[key]["from_employer"]
-												? msgObj[key]["employer_name"]
-												: msgObj[key]["student_name"]
-										} // check who sent msg
-										content={msgObj[key]["content"]}
-									/>
-								);
-							}
-					)
+							return (
+								<SingleMessage
+									key={index}
+									identifier={msgObj[key]["from"]}
+									sender={
+										msgObj[key]["from_employer"]
+											? msgObj[key]["employer_name"]
+											: msgObj[key]["student_name"]
+									} // check who sent msg
+									content={msgObj[key]["content"]}
+								/>
+							);
+					  })
 					: ""}
 			</div>
 			<InputGroup className='message-input'>
