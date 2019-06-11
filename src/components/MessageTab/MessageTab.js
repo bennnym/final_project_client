@@ -111,7 +111,6 @@ const MessageTab = props => {
 						return result[key][studentName][k]["student_read"] === false
 
 					})
-					console.log('set read', unread)
 					if (unread.length >= 1) { count += 1 }
 
 				})

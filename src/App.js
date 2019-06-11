@@ -25,6 +25,7 @@ import {
 	faSnowman,
 	faInbox,
 	faDice,
+	faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -39,7 +40,8 @@ library.add(
 	faHeart,
 	faSnowman,
 	faInbox,
-	faDice
+	faDice,
+	faEnvelope
 );
 
 function App() {

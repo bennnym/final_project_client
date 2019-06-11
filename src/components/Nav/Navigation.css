@@ -14,3 +14,12 @@
 /* .nav-link.active {
   color: rgba(255, 255, 255, .5) !important;
 } */
+
+.fa-2x {
+  color: rgba(255, 255, 255, .5);
+  margin-right: 20px;
+}
+
+#new-message {
+  color: rgb(239, 86, 71);
+}
