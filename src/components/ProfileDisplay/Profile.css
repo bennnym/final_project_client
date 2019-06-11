@@ -103,6 +103,10 @@ text-align: left;
   .profile-image {
     margin-top: 35px;
   }
+  
+  #profile-image {
+    height: 250px !important;
+  }
 
   .profile-layout {
     margin-top: 10px;

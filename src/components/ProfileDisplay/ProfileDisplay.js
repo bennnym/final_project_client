@@ -21,7 +21,7 @@ const ProfileDisplay = props => {
 		first_name,
 		last_name,
 		reserve_price,
-		watchlists,
+			watchlists,
 	} = props.data;
 
 	if ( moment().utc() > moment(auction_duration) ){ return (<Redirect to="/auctions"/> )}

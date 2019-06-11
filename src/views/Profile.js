@@ -53,7 +53,7 @@ const Profile = props => {
 							<h1 className='mobile-name'>
 								{data.first_name} {data.last_name}
 							</h1>
-							<img
+							<img id="profile-image"
 								className='profile-image mx-auto'
 								src={data.profile_photo}
 								alt='profile'
