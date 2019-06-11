@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
 	Navbar,
 	NavDropdown,
-	Form,
-	FormControl,
-	Button,
 	Nav,
 } from "react-bootstrap";
 import "./Navigation.css";
@@ -24,7 +21,7 @@ const Navigation = props => {
 	const [SignInModalShow, setSignInModalShow] = useState(false);
 	const [SignUpModalShow, setSignUpModalShow] = useState(false);
 	const [randomID, setRandomID] = useState(false);
-	const [newMsg, setnewMsg] = useState(false);
+	const [newMsg, setnewMsg] = useState("	");
 
 	let SignInModalClose = () => setSignInModalShow(false);
 	let SignUpModalClose = () => setSignUpModalShow(false);

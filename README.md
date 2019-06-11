@@ -1,68 +1,105 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ![](./src/assets/readme-images/ga.png) SEI-31 Final Project: GradBay
 
-## Available Scripts
+This was developed as part of SEI 31 for my final project, the goal was to build a web application from scratch, to show off what I have learned over my short, yet intense three month 'coding-bootcamp' at General Assembly. The type of web application I chose to create was completely up to me as well as the tech stack.
 
-In the project directory, you can run:
+There were a few prerequisit conditions for the app, they are as follows:
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+You can see the site [here](https://bennnym.github.io/gradbay/).
 
-### `npm test`
+## Key Point
+The codebase was built to minimise repeatable code. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## GradBay
+---
+### Home
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The home page gives a brief explanation of who GradBay is and show's the student's who's auctions are ending soon.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+#### Nav-Bar
+![](./src/assets/readme-images/nav-bar.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The Nav-bar gives both types of users ( students and employers ) the ability to signup, signin or logout regardless of what page they are on. Once signed in the Nav also has added fucntionality such as the 'mail detector', this is the top right hand corner envelope icon. When a user has unread messages in their inbox this icon will appear in colour.
 
-### `npm run eject`
+The Nav also has a 'Feeling Lucky' icon allowing the user to click and be directed to a randomly generated profile.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Ending Soon
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ADD IMAGE
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The ending soon section shows three student auctions which are ending soon. You can make a quick bid on that student ( if you are logged in as an employer ) or click their image to be directed to their profile.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Who are we
+![](./src/assets/readme-images/Who-are-we.png)
 
-## Learn More
+The who are we component just shows a brief description of GradBay.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Auctions Page
 
-### Code Splitting
+#### Search Input
+![](./src/assets/readme-images/Search-input.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+The search input has the ability to search for any student in the database. The search algorithm was generated to be able to search for any combination of numbers that form a connection within a students name.
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+#### Student Cards
 
-### Making a Progressive Web App
+ADD IMAGE
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+The students cards are generated and ordered in terms of auction ending time. Users have the ability to make a quick bid or navigate to the students profile.
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+---
 
-### Deployment
+### Profile Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![](./src/assets/readme-images/Profile-Page.png)
 
-### `npm run build` fails to minify
+The profile page displays all of the students information including a full sized pdf version of the students CV. Employer users also have the ability to add a student to their watchlist with a simple click of a button and the functionality to send a student a private message.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+---
+### My GradBay
+
+![](./src/assets/readme-images/my-GradBay.png)
+
+Here users have the ability to navigate to different tabs ( Students and Employers have different access )
+
+#### Activity Tab
+
+The Activity Tab is comprised of three subtabs
+
+#### Offers
+
+The Offers tab shows an Employer user all of the bids/offers they have made since signup, the detail shows the status of their offers, if they won the auction, lost or if the auction is still live, in which case they are linked to the profile fo that student.
+
+#### Employer
+
+This subtab shows all the Employers succesful auctions.
+
+#### Watchlist
+
+This subtab shows all of the students that the employer has chosen to add to their wishlist.
+
+
+#### Message Tab
+
+![](./src/assets/readme-images/Messages-tab.png)
+
+Here users ( students an employers ) can view messages between themselves in real time. Unread messages will appear in bold on the left hand tab and the tab itself will show the number of unread messages eg. Messages ( 2 ). The live messaging functionality is built in with a firebase hosted database.
+
+#### Account Tab
+
+Here users are able to update their login details.
+
+
+## Tech Stack
+**Languages:** HTML, CSS, Ruby and Javascript
+**Frameworks:** Rails, React
+**Back-end Server:** Heroku, Firebase
+**Front-end Hosting:** Github Pages
+**Other:** Font Awesome, Bootstrap, Spring, Formik, Cloudinary

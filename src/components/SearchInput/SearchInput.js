@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { InputGroup, Button } from "react-bootstrap";
 import "./SearchInput.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -11,7 +11,7 @@ const SearchInput = props => {
   const [profileData, setProfileData] = useState("");
   const [options, setOptions] = useState("")
   const [input, setInput] = useState("");
-  const { gradData, setGradData } = props
+  const { setGradData } = props
 
   const _typeahead = useRef(null)
 

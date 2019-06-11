@@ -44,7 +44,6 @@ const EmployedTab = () => {
 						university,
 						email,
 						id,
-						reserve_price,
 					} = student_info.student;
 					const OfferDate = moment(created_at)
 						.format()

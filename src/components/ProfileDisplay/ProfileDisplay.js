@@ -18,13 +18,9 @@ const ProfileDisplay = props => {
 		id,
 		auction_duration,
 		bids,
-		cv,
-		email,
 		first_name,
 		last_name,
-		gpa,
 		reserve_price,
-		university,
 		watchlists,
 	} = props.data;
 

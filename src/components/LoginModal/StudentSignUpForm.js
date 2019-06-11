@@ -7,7 +7,6 @@ import axios from "axios";
 import moment from "moment";
 import links from "../../../src/links";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SignUpProfile from "./SignUpProfile";
 

@@ -39,7 +39,6 @@ const WatchlistTab = () => {
         <div className='tab-heading'>Watchlist</div>
       {offerData.length > 0 ? (
         offerData.map((student_info, index) => {
-          const { created_at } = student_info.watchlist;
           const {
             profile_photo,
             first_name,

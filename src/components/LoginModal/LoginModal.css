@@ -47,11 +47,16 @@
   color: orangered;
 }
 
-.show-data ul {
-  list-style: none;
-  line-height: 367%;
-  text-align: center;
+.show-data {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         padding: 5px;
+         width: 100%;
+         align-items: center;
 }
+
+
 
 .time-left {
   color: orangered;

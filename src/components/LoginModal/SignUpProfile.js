@@ -21,20 +21,20 @@ const SignUpProfile = (props) => {
         <img className='profile-confirm' src={profilePhoto} alt='' />
       </div>
       <div className='show-data'>
-        <ul>
-          <li>
+       
+          <div>
             Reserve Salary: <span> ${formatNumber(reserve)}</span>
-          </li>
-          <li>Time Till Employment: </li>
-          <li>
+          </div>
+          <div>Time Till Employment: </div>
+          <div>
             <span className='time-left'>
               {day}d {hour}h {minute}m {second}s
 							</span>
-          </li>
-          <li>
+          </div>
+          <div>
             Bids: <span>0</span>{" "}
-          </li>
-          <li>
+          </div>
+          <div>
             <Link
               to={{
                 pathname: `/profile/${id}`,
@@ -44,8 +44,7 @@ const SignUpProfile = (props) => {
               }}>
               Profile
 							</Link>
-          </li>
-        </ul>
+          </div>
       </div>
     </div>
   );

@@ -14,18 +14,14 @@ import "../components/ProfileDisplay/Profile.css";
 const Profile = props => {
 	const [data, setData] = useState({});
 	const [bidArr, setBidArr] = useState(false);
-	const [id, setID] = useState("");
 
 	const renderProfile = () => {
 		if (!props.location.state) {
 			var newID = window.location.href.split("/");
 			newID = newID[newID.length - 1];
-			console.log('set new ID to ', newID)
 		} else {
 			newID = props.location.state.id;
-			console.log('set new ID to ', newID)
 		}
-		setID(newID);
 
 		axios
 			.get(links.root + `student/${newID}`)
