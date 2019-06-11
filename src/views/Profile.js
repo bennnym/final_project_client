@@ -18,10 +18,12 @@ const Profile = props => {
 
 	const renderProfile = () => {
 		if (!props.location.state) {
-			var newID = window.location.pathname.split("/");
+			var newID = window.location.href.split("/");
 			newID = newID[newID.length - 1];
+			console.log('set new ID to ', newID)
 		} else {
 			newID = props.location.state.id;
+			console.log('set new ID to ', newID)
 		}
 		setID(newID);
 

@@ -50,8 +50,9 @@ const Navigation = props => {
 			let length = res.data.length 
 			let random = Math.floor(Math.random() * (length - 1))
 			setRandomID(  res.data[random].id )
-		})
-	}
+			console.log('set it to ', res.data[random].id)
+	})
+}
 
 	return (
 		<Navbar bg='dark' variant='dark' expand='lg'>

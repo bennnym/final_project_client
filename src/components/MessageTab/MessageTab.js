@@ -24,13 +24,13 @@ const MessageTab = props => {
 			const newRef = databaseRef.child(employerID);
 
 			if (props.newMsg) {
-				newRef.once("value").then(snapshot => {
+				newRef.once("value").then(snapshot => { // if it is a new msg, look for a branch
 					const keys = _.keys(snapshot.val()); // gets the students
 					const match = keys.filter(key => {
 						return Number(key.split("-")[0]) === studentID;
 					});
 
-					if (match.length === 0) {
+					if (match.length === 0) { // if the student doesnt exist, make a branch in the db
 						newRef
 							.child(`${studentID}-${props.studentName}`)
 							.set(moment().format());
@@ -40,17 +40,20 @@ const MessageTab = props => {
 			}
 
 			newRef.on("value", snapshot => {
-				if (snapshot.val() === null && studentID) {
-					// there are no messages so we probably need to create one with the new student we are attempting to mesage
-					newRef
-						.child(`${studentID}-${props.studentName}`)
-						.set(moment().format());
+				// if (snapshot.val() === null && studentID) { // if the user is just looking at the account section
 
-					props.setNewMsg(false);
+				// 	// there are no messages so we probably need to create one with the new student we are attempting to mesage
+				// 	newRef
+				// 		.child(`${studentID}-${props.studentName}`)
+				// 		.set(moment().format());
 
-					// student id in the format of num-name
-				}
-				const messageData = snapshot.val();
+				// 	props.setNewMsg(false);
+
+				// 	// student id in the format of num-name
+				// }
+
+
+				const messageData = snapshot.val(); // this counts the unread messages
 				const studentKeys = _.keys(messageData);
 				let count = 0; // this counts how many unread msgs we have
 				studentKeys.forEach(student => {
@@ -59,7 +62,7 @@ const MessageTab = props => {
 					let read = msgKeys.filter(msg => {
 						return messageData[student][msg]["employer_read"] === false;
 					});
-
+						
 					if (read.length >= 1) {
 						count += 1;
 					}
@@ -74,7 +77,7 @@ const MessageTab = props => {
 		} else if (props.student) {
 			// need to find all the messages to that student and who they are from etc
 			// end goal is to feed in the keys and object for the students emails they have got!
-			databaseRef.on("value",snapshot => {
+			databaseRef.on("value", snapshot => {
 				let data = snapshot.val();
 
 				let keys = _.keys(data);
@@ -94,21 +97,21 @@ const MessageTab = props => {
 
 				// calculate how many messages are unread
 
-				const employerKeys = _.keys(data)
+				const employerKeys = _.keys(result)
 
-				let studentName = _.keys(data[employerKeys[0]])
+				let studentName = _.keys(result[employerKeys[0]])
 				studentName = studentName[0]
 				let count = 0;
-
+				console.log(studentName)
 				employerKeys.forEach(key => {
-					let msgKeys = _.keys(data[key][studentName])
+					let msgKeys = _.keys(result[key][studentName])
 
 					let unread = msgKeys.filter(k => {
 
-						return data[key][studentName][k]["student_read"] === false
+						return result[key][studentName][k]["student_read"] === false
 
 					})
-
+					console.log('set read', unread)
 					if (unread.length >= 1) { count += 1 }
 
 				})
@@ -134,22 +137,24 @@ const MessageTab = props => {
 	};
 
 	const _markStudentRead = (e) => {
+		if (e.target.text === "Incoming Message") { return}
+
 		const company = e.target.text
 		databaseRef.once("value").then(snapshot => {
-		const companyKeys = _.keys(messages)
+			const companyKeys = _.keys(messages)
 
-		companyKeys.forEach( key => {
-			let msgKeys = _.keys(messages[key][studentKey])
-			
-			if (messages[key][studentKey][msgKeys[0]]["employer_name"] === company ){
-				msgKeys.forEach( msg => {
-					
-					if (messages[key][studentKey][msg]["from"] === "employer") {
-						databaseRef.child(key).child(studentKey).child(msg).child("student_read").set(true)
-					}
-				})
-			}
-		})
+			companyKeys.forEach(key => {
+				let msgKeys = _.keys(messages[key][studentKey])
+
+				if (messages[key][studentKey][msgKeys[0]]["employer_name"] === company) {
+					msgKeys.forEach(msg => {
+
+						if (messages[key][studentKey][msg]["from"] === "employer") {
+							databaseRef.child(key).child(studentKey).child(msg).child("student_read").set(true)
+						}
+					})
+				}
+			})
 		})
 	}
 
@@ -231,8 +236,8 @@ const MessageTab = props => {
 								}
 							})
 						) : (
-							<></>
-						)}
+								<></>
+							)}
 					</Nav>
 				</Col>
 
@@ -250,7 +255,7 @@ const MessageTab = props => {
 												employerID={employerID}
 												studentID={id}
 												studentName={name} // these are all the messages between that student and employer
-												
+
 											/>
 										</Tab.Pane>
 									);
@@ -264,15 +269,15 @@ const MessageTab = props => {
 												studentID={localStorage.studentID}
 												studentName={studentKey.split("-")[1]} // these are all the messages between that student and employer
 												studentKey={studentKey}
-												
+
 											/>
 										</Tab.Pane>
 									);
 								}
 							})
 						) : (
-							<EmptyInbox />
-						)}
+								<EmptyInbox />
+							)}
 					</Tab.Content>
 				</Col>
 			</Row>

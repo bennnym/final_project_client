@@ -22,7 +22,6 @@ const SearchInput = props => {
 	const _getSearchData = () => {
 		if (!profileData) {
 			axios.get(links.root + "students").then(res => {
-				console.log(res.data);
         const firstNames = _.pluck(res.data, "first_name");
         const lastNames = _.pluck(res.data, "last_name");
 
