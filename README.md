@@ -4,12 +4,7 @@ This was developed as part of SEI 31 for my final project, the goal was to build
 
 There were a few prerequisit conditions for the app, they are as follows:
 
-
-
 You can see the site [here](https://bennnym.github.io/gradbay/).
-
-## Key Point
-The codebase was built to minimise repeatable code. 
 
 
 ## GradBay
@@ -27,7 +22,7 @@ The Nav also has a 'Feeling Lucky' icon allowing the user to click and be direct
 
 #### Ending Soon
 
-ADD IMAGE
+![](./src/assets/readme-images/Ending-Soon.png)
 
 The ending soon section shows three student auctions which are ending soon. You can make a quick bid on that student ( if you are logged in as an employer ) or click their image to be directed to their profile.
 
@@ -41,14 +36,14 @@ The who are we component just shows a brief description of GradBay.
 ### Auctions Page
 
 #### Search Input
-![](./src/assets/readme-images/Search-input.png)
+![](./src/assets/readme-images/Search-Input.png)
 
 The search input has the ability to search for any student in the database. The search algorithm was generated to be able to search for any combination of numbers that form a connection within a students name.
 
 
 #### Student Cards
 
-ADD IMAGE
+![](./src/assets/readme-images/Student-Cards.png)
 
 The students cards are generated and ordered in terms of auction ending time. Users have the ability to make a quick bid or navigate to the students profile.
 
@@ -98,8 +93,8 @@ Here users are able to update their login details.
 
 
 ## Tech Stack
-**Languages:** HTML, CSS, Ruby and Javascript
-**Frameworks:** Rails, React
-**Back-end Server:** Heroku, Firebase
-**Front-end Hosting:** Github Pages
-**Other:** Font Awesome, Bootstrap, Spring, Formik, Cloudinary
+**Languages:** HTML, CSS, Ruby and Javascript  
+**Frameworks:** Rails, React  
+**Back-end Server:** Heroku, Firebase  
+**Front-end Hosting:** Github Pages  
+**Other:** Font Awesome, Bootstrap, Spring, Formik, Cloudinary  
