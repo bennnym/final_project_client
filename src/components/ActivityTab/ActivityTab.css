@@ -129,6 +129,10 @@
 		flex-direction: row;
 	}
 
+	.tab-heading {
+		display: none;
+	}
+
 	.empty {
 		min-height: 220px;
 	}

@@ -196,7 +196,7 @@ const ProfileDisplay = props => {
 								}}>
 								<Button variant="warning">{`Message ${first_name}`}</Button>
 							</Link>
-						) : props.student ? '' : (
+						) : !props.employer ?  '' : (
 								<Button variant="warning">Message </Button>
 						)}
 					</div>

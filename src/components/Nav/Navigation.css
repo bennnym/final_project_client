@@ -23,3 +23,11 @@
 #new-message {
   color: rgb(239, 86, 71);
 }
+
+@media only screen and (max-width: 700px) {
+
+  .message-nav {
+    display: none;
+  }
+
+}

@@ -197,7 +197,7 @@ const Navigation = props => {
 					/>
 				</Nav>
 				{ props.employer || props.student ? 
-				<Link to='/myacc' className='nav-link'>
+				<Link to='/myacc' className='nav-link message-nav'>
 					<FontAwesomeIcon id={newMsg} className='fa-2x' icon='envelope' />
 				</Link> : '' }
 			</Navbar.Collapse>
