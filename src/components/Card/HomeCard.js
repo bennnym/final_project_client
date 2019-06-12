@@ -29,6 +29,7 @@ const HomeCard = ( props ) => {
     }, 1000)
   },[])
 
+
   const formatNumber = (num) => { //formats with commas
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
@@ -43,8 +44,8 @@ const HomeCard = ( props ) => {
           id: id,
         }
       }}>
-
-      <Card.Img id="card-image" variant="top" src={profile_photo} />
+        <div id="profile-image-home" style={{ backgroundImage: `url(${profile_photo})`}}></div>
+      {/* <Card.Img id="card-image" variant="top" src={_imageAspect(profile_photo)} /> */}
       </Link>
 
       <Card.Body className="home-card-body">

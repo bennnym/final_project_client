@@ -42,6 +42,12 @@ div.card-group {
   font-weight: 900;
 }
 
+#profile-image-home {
+  height: 200px;
+  background-size: cover;
+  background-position: top;
+}
+
 #home-button {
   background-color: webkit-gradient(linear, left top, left bottom, from(#0079bc), to(#00509d)) !important;
 }

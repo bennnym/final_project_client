@@ -60,12 +60,10 @@ const SingleCard = props => {
 				<div id='horizontal-card' className='card'>
 					<div className='row '>
 						<div className='col-md-4'>
-							<img
-								id='horizontal-img'
-								src={image}
-								alt='headshot'
-								className='w-100'
-							/>
+							<div
+								style={{ backgroundImage: `url(${image})` }}
+								className='w-100 auction-card-image'
+							></div>
 						</div>
 						<div className='col-md-4 px-3'>
 							<div className='card-block px-3'>

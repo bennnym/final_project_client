@@ -115,6 +115,13 @@
   color: red !important;
 }
 
+.offer-card-image {
+		height: 100%;
+		background-size: cover;
+		background-position: top;
+}
+
+
 @media only screen and (max-width: 700px) {
 	.upper-row {
 		display: flex;
@@ -147,7 +154,14 @@
 	}
 
 	.offer-image {
-		max-width: 100%;
+		height: 100px;
+	}
+
+	.offer-card-image {
+		height: 100px;
+		width: 200px;
+		background-size: cover;
+		background-position: top;
 	}
 
 	.right-box {
@@ -160,5 +174,9 @@
 
 	.tab-card-body > div {
 		text-align: center;
+	}
+
+	.col-2 {
+		max-width: 33% !important;
 	}
 }

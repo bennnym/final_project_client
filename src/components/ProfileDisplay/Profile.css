@@ -9,6 +9,14 @@
   /* border-radius: 0.3em; */
   box-shadow: 0 0.1rem 0.4rem;
   margin-bottom: 1em;
+  background-size: cover;
+  background-position: top;
+}
+
+#profile-image {
+    height: 305px !important;
+    background-size: cover;
+    background-position: top;
 }
 
 .profile-name {
@@ -110,6 +118,10 @@ text-align: left;
 
   .profile-layout {
     margin-top: 10px;
+  }
+
+  #card-properties {
+    height: 33em;
   }
 
   .pricing {

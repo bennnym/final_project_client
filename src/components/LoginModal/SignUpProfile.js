@@ -15,10 +15,17 @@ const SignUpProfile = (props) => {
     }
   };
 
+   const _imageAspect = (imageURL) => {
+    imageURL = imageURL.split('/')
+    imageURL[imageURL.length - 2] = 'h_220,w_337,c_fill'
+    imageURL = imageURL.join('/')
+    return imageURL
+  }
+
   return(
     <div className='photo-container'>
       <div className='show-photo'>
-        <img className='profile-confirm' src={profilePhoto} alt='' />
+        <img className='profile-confirm' src={_imageAspect(profilePhoto)} alt='' />
       </div>
       <div className='show-data'>
        

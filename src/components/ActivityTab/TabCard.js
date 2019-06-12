@@ -32,9 +32,14 @@ const TabCard = props => {
 						<div className='tab-small-headings'>${bidAmount}</div>
 					</Col>
 				</Row>
+
+				
 				<Row className='offer-card'>
-					<Col className='offer-image' xs={2}>
-						<img src={profilePhoto} alt='holder' />
+					<Col className='offer-image mx-auto' xs={2}>
+						<div
+							style={{ backgroundImage: `url(${profilePhoto})` }}
+							className='w-100 mx-auto		 offer-card-image'
+						></div>
 					</Col>
 					<Col className='middle-box' xs={6}>
 						<span className='tab-spans header'>

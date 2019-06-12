@@ -36,6 +36,11 @@ div #horizontal-card {
     flex-direction: column;
 }
 
+.auction-card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: top;
+}
 
 .card-buttons  {
     justify-content: center;
@@ -70,13 +75,13 @@ div #horizontal-card {
 
   div #horizontal-card {
     padding: 13px;
-    height: 520px;
+    height: 535px;
     margin-bottom: 20px;
     overflow: hidden;
   }
 
   #card-holder {
-    height: 520px;
+    height: 535px;
     margin-bottom: 20px;
   }
 
