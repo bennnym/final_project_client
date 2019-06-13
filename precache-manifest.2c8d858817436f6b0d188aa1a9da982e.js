@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d9a2c0f7c59f2148940b9b483d1ef948",
+    "revision": "dd1406154380d7b7ccfae89a44f3b088",
     "url": "/gradbay/index.html"
   },
   {
-    "revision": "a4d6f4a7ae47a59ea1b1",
+    "revision": "7e77a104b3885b58de31",
     "url": "/gradbay/static/css/main.758a04e4.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gradbay/static/js/2.450c013d.chunk.js"
   },
   {
-    "revision": "a4d6f4a7ae47a59ea1b1",
-    "url": "/gradbay/static/js/main.09d2b4a4.chunk.js"
+    "revision": "7e77a104b3885b58de31",
+    "url": "/gradbay/static/js/main.0af93890.chunk.js"
   },
   {
     "revision": "16009d96672cc6cf2986",
