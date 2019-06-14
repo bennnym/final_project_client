@@ -5,6 +5,8 @@ import moment from 'moment';
 import LoginForm from '../LoginModal/LoginForm';
 import QuickOfferModal from '../QuickOfferModal/QuickOfferModal'
 import { Link } from 'react-router-dom';
+import datehelper from '../../helper/datehelper'
+
 
 const HomeCard = ( props ) => {
   const { id, first_name, last_name, reserve_price, profile_photo, university, auction_duration, bids } = props.data
@@ -18,14 +20,15 @@ const HomeCard = ( props ) => {
     setInterval(() => {
       let timeNow = moment.utc()
       let auctionEnd = moment(auction_duration)
-      let dif = new moment.duration(auctionEnd - timeNow)
+      let milliseconds = auctionEnd.diff(timeNow)
+      const dif = datehelper(milliseconds, 'total_hours')
 
       // set state
-      const { days, hours, minutes, seconds } = dif._data
+      	const { d, h, m, s } = dif
       // setDays(days)
-      setHours(hours + days * 24 )
-      setMinutes(minutes)
-      setSeconds(seconds)
+      setHours(h + d * 24 )
+      setMinutes(m)
+      setSeconds(s)
     }, 1000)
   },[])
 

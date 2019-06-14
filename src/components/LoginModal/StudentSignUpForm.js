@@ -9,6 +9,7 @@ import links from "../../../src/links";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import SignUpProfile from "./SignUpProfile";
+import datehelper from '../../helper/datehelper'
 
 const schema = yup.object({
 	firstName: yup.string().required(),
@@ -64,18 +65,17 @@ const StudentSignUpForm = props => {
 
 	const timeDisplay = db_time => {
 		// this converts the time to dd,hh,mm,ss
-
 		setInterval(() => {
 			let timeNow = moment.utc();
 			let auctionEnd = moment(db_time);
-			let dif = new moment.duration(auctionEnd - timeNow);
-
+			let milliseconds = auctionEnd.diff(timeNow)
 			// set state
-			const { days, hours, minutes, seconds } = dif._data;
-			setDays(days);
-			setHours(hours);
-			setMinutes(minutes);
-			setSeconds(seconds);
+			const dif = datehelper(milliseconds, 'days')
+			const { d, h, m, s } = dif
+			setDays(d);
+			setHours(h);
+			setMinutes(m);
+			setSeconds(s);
 		}, 1000);
 	};
 
@@ -89,8 +89,8 @@ const StudentSignUpForm = props => {
 				.utc()
 				.add(days, "days")
 				.format();
-			time = time.split("Z");
-			time = time[0].split("T").join(" ");
+			// time = time.split("Z");
+			// time = time[0].split("T").join(" ");
 			return time;
 		};
 

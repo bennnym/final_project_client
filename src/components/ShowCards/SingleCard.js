@@ -5,6 +5,8 @@ import QuickOfferModal from "../QuickOfferModal/QuickOfferModal";
 import { Button } from "react-bootstrap";
 import LoginForm from "../LoginModal/LoginForm";
 import { Link } from "react-router-dom";
+import datehelper from '../../helper/datehelper'
+
 
 const SingleCard = props => {
 	const {
@@ -42,15 +44,15 @@ const SingleCard = props => {
 		setInterval(() => {
 			let timeNow = moment.utc();
 			let auctionEnd = moment(timeLeft);
-			let dif = new moment.duration(auctionEnd - timeNow);
+			let milliseconds = auctionEnd.diff(timeNow)
 
 			// set state
-			const { days, hours, minutes, seconds } = dif._data;
-			// setDays(days)
-			setDays(days);
-			setHours(hours);
-			setMinutes(minutes);
-			setSeconds(seconds);
+			const dif = datehelper(milliseconds, 'days')
+			const { d, h, m, s } = dif
+			setDays(d);
+			setHours(h);
+			setMinutes(m);
+			setSeconds(s);
 		}, 1000);
 	}, []);
 
