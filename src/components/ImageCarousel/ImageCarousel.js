@@ -1,12 +1,12 @@
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
-import carousel1 from '../../assets/img/carousel1.jpg'
-import carousel2 from '../../assets/img/carousel4.jpg'
-import carousel3 from '../../assets/img/carousel2.jpg'
-import './ImageCarousel.css'
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import carousel1 from "../../assets/img/carousel1.jpg";
+import carousel2 from "../../assets/img/carousel4.jpg";
+import carousel3 from "../../assets/img/carousel2.jpg";
+import "./ImageCarousel.css";
 
-const ImageCarousel = (prop) => {
-  return(
+const ImageCarousel = prop => {
+  return (
     <Carousel className="carousel" id="carousel-container">
       <Carousel.Item>
         <img
@@ -15,10 +15,8 @@ const ImageCarousel = (prop) => {
           src={carousel1}
           alt="First slide"
         />
-    
-        <Carousel.Caption>
-      
-        </Carousel.Caption>
+
+        <Carousel.Caption></Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -28,8 +26,7 @@ const ImageCarousel = (prop) => {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-        </Carousel.Caption>
+        <Carousel.Caption></Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -39,11 +36,10 @@ const ImageCarousel = (prop) => {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-        </Carousel.Caption>
+        <Carousel.Caption></Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-  )
-}
+  );
+};
 
 export default ImageCarousel;

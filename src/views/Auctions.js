@@ -7,19 +7,19 @@ import ShowCards from "../components/ShowCards/ShowCards";
 import SearchInput from "../components/SearchInput/SearchInput";
 
 const Auctions = props => {
-	const [gradData, setGradData] = useState([]);
+  const [gradData, setGradData] = useState([]);
 
-	return (
-		<React.Fragment>
-			<Navigation href='/auctions' />
-			<ImageCarousel />
-			<Layout>
-				<SearchInput gradData={gradData} setGradData={setGradData} />
-				<ShowCards gradData={gradData} setGradData={setGradData} />
-			</Layout>
-			<Footer />
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <Navigation href="/auctions" />
+      <ImageCarousel />
+      <Layout>
+        <SearchInput gradData={gradData} setGradData={setGradData} />
+        <ShowCards gradData={gradData} setGradData={setGradData} />
+      </Layout>
+      <Footer />
+    </React.Fragment>
+  );
 };
 
 export default Auctions;

@@ -1,4 +1,4 @@
-export default function convertMiliseconds (miliseconds, format) {
+export default function convertMiliseconds(miliseconds, format) {
   var days, hours, minutes, seconds, total_hours, total_minutes, total_seconds;
 
   total_seconds = parseInt(Math.floor(miliseconds / 1000));
@@ -11,19 +11,19 @@ export default function convertMiliseconds (miliseconds, format) {
   hours = parseInt(total_hours % 24);
 
   switch (format) {
-    case 's':
+    case "s":
       return total_seconds;
       break;
-    case 'm':
+    case "m":
       return total_minutes;
       break;
-    case 'h':
+    case "h":
       return total_hours;
       break;
-    case 'd':
+    case "d":
       return days;
       break;
     default:
       return { d: days, h: hours, m: minutes, s: seconds };
   }
-};
+}

@@ -1,24 +1,24 @@
 const initialState = {
   employer: localStorage.employer ? JSON.parse(localStorage.employer) : false,
-  student: localStorage.student ? JSON.parse(localStorage.student) : false,
+  student: localStorage.student ? JSON.parse(localStorage.student) : false
   // highBid: ''
 };
 
-export default (state=initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SETSTUDENT':
+    case "SETSTUDENT":
       return {
         student: !state.student
       };
-    case 'SETEMPLOYER':
+    case "SETEMPLOYER":
       return {
         employer: !state.employer
       };
-    case 'HIGHBIDTRUE':
+    case "HIGHBIDTRUE":
       return {
         highBid: true
       };
-    case 'HIGHBIDFALSE':
+    case "HIGHBIDFALSE":
       return {
         highBid: false
       };
@@ -29,4 +29,4 @@ export default (state=initialState, action) => {
     default:
       return state;
   }
-}
+};
